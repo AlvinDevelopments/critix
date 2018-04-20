@@ -17,6 +17,8 @@ function rename() {
     y.setAttribute("value", "Donald");
     document.getElementById("myForm").appendChild(y);
 
+    
+
 }
 
 

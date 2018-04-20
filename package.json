@@ -1,0 +1,22 @@
+{
+  "name": "critix",
+  "version": "1.0.0",
+  "description": "A photo sharing app for creators to receive constructive advice",
+  "main": "/bin/www",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshquines/critix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshquines/critix/issues"
+  },
+  "homepage": "https://github.com/joshquines/critix#readme"
+}

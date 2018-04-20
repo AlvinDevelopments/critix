@@ -8,6 +8,9 @@ const Comment = require('../models/Comment');
 const Post = require('../models/Post');
 
 
+let functions = require('../lib/functions');
+
+
 const express = require('express');
 
 var router = express.Router();
@@ -36,13 +39,21 @@ router.get('/login', function(req,res){
   res.render('login');
 })
 
+// Retrieve Sign Up Page
+router.get('/signup', function(req,res){
+  res.render('signup');
+})
 
 
-router.get('/getcomments',function(req,res){
+// Retrieve Comments for post_id
+router.get('/loadComments',function(req,res){
 
+  let format = req.query.format;
+  type = req.query.type;
 
   let queryComments = Comment.find();
-  queryComments.find({'post_id':req.c});
+  queryComments.find({'post_id':req.query.post_id});
+  console.log(req.query.post_id);
 
   queryComments.exec(function(err,comments){
     if(err){
@@ -52,11 +63,50 @@ router.get('/getcomments',function(req,res){
     }
     else{
       res.send(comments);
+      console.log('current comments: '+comments);
     }
   });
 
 });
 
+// router.post('/postComment?comment=:comment&post_id=:id',function(req,res){
+router.post('/postComment',function(req,res){
+  console.log('posting a comment');
+
+  let comment = new Comment();
+
+  comment.comment = req.body.comment;
+  // console.log(req);
+comment.post_id = req.body.post_id;
+  // comment.author = req.session.user.username;
+
+  comment.time = Date.now();
+
+
+
+
+    comment.save(function(err){
+      if(err){
+        console.log("FAILED");
+        console.log(err);
+        return res.status(500).send();
+      }
+      else{
+        console.log("sent to db");
+        // console.log(post);
+        // res.send(comment);
+        // return res.status(200).send();
+      }
+    });
+
+
+});
+
+
+router.get('/test',function(req,res){
+  console.log('console log of the test.');
+  res.send('hi, this is a test!');
+});
 
 // Submit Login Credentials
 router.post('/login', function(req, res){
@@ -127,76 +177,13 @@ router.post('/register', function(req, res){
 
 // Alvin's stuff below--------
 
-// Set Storage engine
-let storage = multer.diskStorage({
-  destination: './public/uploads/images',
-  filename: function(reg,file,cb){
-    cb(null,file.myImage+'-'+Date.now()+path.extname(file.originalname));
-    console.log(path.extname(file.originalname));
-    // cb(null,file.myImage+'-'+Date.now()+'.jpg');
-  }
-});
-
-// parser for uploads via Multer
-const upload = multer({
-  storage: storage,
-  // fileFilter:function(req,file,cb){
-  //   checkFileType(file,cb);
-  // }
-// }).single('myWave');
-
-}).single('image_file');
-
-
-
-// Check File type
-function checkFileType(file, cb){
-  // Allowed ext
-  const filetypes = /jpg|jpeg|png/;
-  // Check extn
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
-
-  if(extname&&extname){
-    return cb(null,true);
-  }
-  else{
-    cb('Error: Images Only!');
-  }
-}
-
-
-// Authenicate the user and password to match a DB entry
-function authenticateCredentials(req,res){
-  return function(req,res,next){
-      next();
-  }
-}
-
-// Check if user is logged in
-function checkIfLoggedIn(){
-  return function(req,res,next){
-      // console.log(req.session.user);
-      // if(req.session.user!=undefined){
-      //     next();
-      // }
-      // else{
-      //   console.log("NOT LOGGED IN!!");
-      //   res.render('index0');
-      // }
-
-      next();
-  }
-}
-
 // loads login page
 // router.post('/login',authenticateCredentials(),function(req,res){
 //   // res.render('home');
 // });
 
 // Renders the main page if user is logged in.
-router.get('/',checkIfLoggedIn(),(req,res)=>res.render('index'));
+router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index'));
 
 
 // Render Upload page
@@ -209,7 +196,7 @@ router.post('/upload',(req,res)=>{
   // console.log(req);
 	console.log("upload request");
   // create post via post Schema
-  upload(req,res,(err)=>{
+  functions.upload(req,res,(err)=>{
     // console.log(req.file.filename);
     console.log(req.body.title);
     // console.log('-----------------------------');
@@ -269,7 +256,7 @@ router.post('/upload',(req,res)=>{
 
 // Retrieves the server filepath of a file based on post_id and displays it
 router.get('/post/:_id',(req,res)=>{
-  console.log('generating post');
+  // console.log('generating post');
 
   let query = Post.findOne({'_id':ObjectID(req.params._id)});
   query.select('_id filepath title date');
@@ -295,58 +282,52 @@ router.get('/post/:_id',(req,res)=>{
 });
 
 
-// Post Comment
-// Add a comment to an existing post.
-router.post('/comment',(req,res)=>{
-  let comment = new Comment();
+// // Post Comment
+// // Add a comment to an existing post.
+// router.post('/comment',(req,res)=>{
+//   let comment = new Comment();
+//
+//   let link = req.headers.referer;
+//   let parsed = link.split('/');
+//   let id = parsed[parsed.length-1];
+//   comment.post_id = id;
+//   console.log(id);
+//   comment.comment = req.body.comment;
+//   // comment.author = req.session.user.username;
+//   // comment.post_id = req;
+//   comment.date = Date.now();
+//
+//   comment.save(function(err){
+//     if(err){
+//       console.log("FAILED");
+//       console.log(err);
+//       // return res.status(500).send();
+//     }
+//     else{
+//       console.log("sent to db");
+//       // console.log(post);
+//       // res.status(200).send({
+//       //   comment: comment
+//       // });
+//       // console.log(req);
+//       // res.redirect('/post/undefined-1523845557148.png',{
+//       //   comment: comment
+//       // });
+//
+//       let link = req.headers.referer;
+//
+//       res.redirect(link);
+//
+//     }
+//   });
+// });
 
-  let link = req.headers.referer;
-  let parsed = link.split('/');
-  let id = parsed[parsed.length-1];
-  comment.post_id = id;
-  console.log(id);
-  comment.comment = req.body.comment;
-  // comment.author = req.session.user.username;
-  // comment.post_id = req;
-  comment.date = Date.now();
-
-  comment.save(function(err){
-    if(err){
-      console.log("FAILED");
-      console.log(err);
-      // return res.status(500).send();
-    }
-    else{
-      console.log("sent to db");
-      // console.log(post);
-      // res.status(200).send({
-      //   comment: comment
-      // });
-      // console.log(req);
-      // res.redirect('/post/undefined-1523845557148.png',{
-      //   comment: comment
-      // });
-
-      let link = req.headers.referer;
-
-      res.redirect(link);
-
-    }
-  });
-});
-
-
-
-router.get('/test',function(req,res){
-  console.log('console log of the test.');
-  res.send('hi, this is a test!');
-});
 
 
 // Displays all posts uploaded
 router.get('/discover',function(req,res){
   let query = Post.find();
-  query.select('post_id');
+  query.select('_id post_id');
 
   query.exec(function(err,posts){
     if(err){
@@ -359,7 +340,7 @@ router.get('/discover',function(req,res){
 
       res.render('discover',{
         posts: posts,
-        filetype: 'png'
+        filetype: 'jpg'
       });
     }
   });

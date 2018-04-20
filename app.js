@@ -32,8 +32,11 @@ var app = express();
 
 // view engine setup EJS
 app.set('view engine', 'ejs');
+
+app.use('/',express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'views')));
 app.use('/discover',express.static('./public'));
-app.use('/',express.static('./views'));
+// app.use('/login',express.static('./views'));
 
 
 // view engine setup
@@ -49,6 +52,7 @@ app.use(bodyParser.json());
 
 app.use(session({secret:"9aduoshbj1082hd8dowhualj", resave:false, saveUninitialized:true}));
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/post',express.static('./views'));
 
 app.use('/', indexRouter);

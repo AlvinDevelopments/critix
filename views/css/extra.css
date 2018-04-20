@@ -19,3 +19,33 @@
     justify-content: center;
     align-items: center;
 }
+
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+    /* width: 40%; */
+}
+.posts{
+  /* text-align: center; */
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  /* grid-row-gap: 10px; */
+  position: relative;
+}
+
+.containerz{
+  width: 20vw;
+  height: 20vw;
+  overflow: hidden;
+
+}
+
+.post{
+  /* width: 100%; */
+  height: 100%;
+  object-fit: cover;
+
+}

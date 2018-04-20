@@ -8,15 +8,22 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/extra.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="post.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/post.js"></script>
 
 </head>
 <!-- <body onload="fetchComments(<%=file._id.toString()%>)"> -->
-<body onload="fetchComments(10101)">
+<body onload="fetchComments('<%=file._id.toString()%>')">
   <h1><%= file.title %></h1>
   <h2>Uploaded on <%= file.date.toISOString().slice(0,10).replace(/-/g,"/"); %> </h2>
 
-  <img src="/<%= file.filepath %>" type="image/<%= filetype %>">
+  <div class="center">
+  <div class="posts">
+  <div class="containerz">
+  <img class="post" src="../uploads/images/<%= file.filepath %>" type="image/<%= filetype %>">
+</div>
+</div>
+</div>
 
   <div id="comments">
   </div>
@@ -24,13 +31,17 @@
 <br>
 
 <!-- <form action='/comment' name="<%=file._id%>" method='post'> -->
-  <form name="<%=file._id%>" method='post'>
+  <form>
   <input style="width:80vw;" id="comment" type='text' name="comment"></input>
-  <input  type='submit' onclick="postComment(<%file._id%>)" ></submit>
+  <input  type='submit' onclick="postComment('<%=file._id.toString()%>')"></input>
 </form>
 
 
-
-
 </body>
+
+<style>
+  html{
+    /* background-color: white; */
+  }
+</style>
 </html>

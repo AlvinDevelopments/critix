@@ -9,18 +9,19 @@ function uploadFile(){
     // Limit File Size
     let fileType = imageFile.files[0].type;
 
-    if ('files' in audioFile) {
+    if ('files' in imageFile) {
         if (imageFile.files.length == 0) {
             txt = "Select one or more files.";
             document.getElementById("uploadResponse").innerHTML = "Select one or more files."; // DO WE NEED THIS?
 
-        } else if (audioFile.files.length > 1){
+        } else if (imageFile.files.length > 1){
             txt = "Please only select 1 file";
             document.getElementById("uploadResponse").innerHTML = "Please only select 1 file"; // DO WE NEED THIS?
 
-        } else if (!(fileType.indexOf('audio') != -1)){
+        } else if (!(fileType.indexOf('image') != -1)){
             txt += "Needs to be AN IMAGE FILE YOU PLEB";
             document.getElementById("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
+
         }else {
             for (let i = 0; i < imageFile.files.length; i++) {
                 let file = imageFile.files[i];
@@ -40,12 +41,10 @@ function uploadFile(){
                         document.getElementById("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
                     }
                     else{
+                        alert("File " + fileName + " has been uploaded successfully!");
                         // DO USEFUL STUFF 
                         // Maybe bring up an HTML element?
                         
-                        
-                        
-
                         // Success Message to HTML Page
                         txt += "Upload of " + fileName + " was successful";
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?

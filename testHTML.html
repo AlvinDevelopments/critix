@@ -2,16 +2,33 @@
 <html>
     <head>
         <script src="scriptTestsHere.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     </head>
 
     <body>
-    <!-- Upload File Here-->
-    <div id="testImage">
-            <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()">
-    </div>
+        <!-- Upload File Here-->
+        <form id="testImage">
+            <input type="text" id="fileUploadName" name="firstname"><br>
+            <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile();rename()">
+        </form>
+        
 
-    <!-- Just Responses after Upload-->
-    <div id="uploadResponse"></div>
+        <!-- Rename Popup-->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+
+
+        </div>
+
+        <!-- Just Responses after Upload-->
+        <div id="uploadResponse"></div>
+
     </body>
 </html>

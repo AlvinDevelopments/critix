@@ -1,28 +1,3 @@
-// Some Div Thing
-function rename2(){
-
-    document.createElement("custom");
-    document.getElementById("custom").innerHTML = "I made a new fucking button wooooo";
-
-}
-
-function rename() {
-
-    let x = document.createElement("FORM");
-    x.setAttribute("id", "myForm");
-    document.body.appendChild(x);
-
-    var y = document.createElement("INPUT");
-    y.setAttribute("type", "text");
-    y.setAttribute("value", "Donald");
-    document.getElementById("myForm").appendChild(y);
-
-    
-
-}
-
-
-
 // FILE UPLOAD
 
 // Upload File
@@ -66,20 +41,15 @@ function uploadFile(){
                         document.getElementById("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
                     }
                     else{
-<<<<<<< HEAD
                         alert("File " + fileName + " has been uploaded successfully!");
                         // DO USEFUL STUFF
                         // Maybe bring up an HTML element?
-=======
-                        //alert("File " + fileName + " has been uploaded successfully!");
-                        // DO USEFUL STUFF 
-                        // Maybe bring up an HTML element?
-                        
->>>>>>> master
 
                         // Success Message to HTML Page
                         txt += "Upload of " + fileName + " was successful";
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
+
+
 
 
                     }

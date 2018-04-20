@@ -4,7 +4,7 @@
 function uploadFile(){
 
     let txt = ""; // For a respgonse message
-    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID 
+    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID
 
     // Limit File Size
     let fileType = imageFile.files[0].type;
@@ -42,9 +42,9 @@ function uploadFile(){
                     }
                     else{
                         alert("File " + fileName + " has been uploaded successfully!");
-                        // DO USEFUL STUFF 
+                        // DO USEFUL STUFF
                         // Maybe bring up an HTML element?
-                        
+
                         // Success Message to HTML Page
                         txt += "Upload of " + fileName + " was successful";
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?

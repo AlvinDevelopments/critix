@@ -83,8 +83,6 @@ comment.post_id = req.body.post_id;
   comment.time = Date.now();
 
 
-
-
     comment.save(function(err){
       if(err){
         console.log("FAILED");

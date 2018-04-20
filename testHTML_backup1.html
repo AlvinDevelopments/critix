@@ -132,36 +132,65 @@
     <body>
 
 
-        <button onclick="document.getElementById('id01').style.display='block'" >Upload File</button>
+
+
+        <h2>Modal Example</h2>
+
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Upload File</button>
         
-        <div id="id01" class="modal">
-            
-            <form class="modal-content animate" id="customNames" >
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
         
+        <!-- Modal Content -->
+        <form class="modal-content animate" id="customNames" > 
+
+
+            <!-- User Input For Upload -->
             <div class="container">
-                <label for="filename"><b>Username</b></label>
-                <input type="text" placeholder="Enter Filename" name="filename" required>
-        
 
+                <!-- User Enters custom filename -->
+                <label for="filename"><b>Filename</b></label>
+                <input type="text"  placeholder="Enter Filename" name="filename" required>
+
+                <!-- User Enters Caption -->
+                <!-- <label for="caption"><b>Caption</b></label> -->
                 <textarea rows="50%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
-                <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
                 
-                <button type="button" id="imageFileUpload" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
-                    Upload File    
-                </button>
-                        
+
+                <!-- Upload File Here-->
+
+                    <!-- <input type="text" id="fileUploadName" name="firstname"><br> -->
+                    <input type="file" id="imageFileUploads" multiple size="50"  onchange="uploadFile()">
+
+
+                <!-- User Picks A File-->
+                <button type="file" id="imageFileUpload" onclick="uploadFile()">Upload</button>
 
             </div>
-
-            </form>
+        </form>
+        
         </div>
-            
+        
         <script>
         // Get the modal
-        var modal = document.getElementById('id01');
+        var modal = document.getElementById('myModal');
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
         
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {

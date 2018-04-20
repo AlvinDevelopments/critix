@@ -17,8 +17,6 @@ function rename() {
     y.setAttribute("value", "Donald");
     document.getElementById("myForm").appendChild(y);
 
-    
-
 }
 
 
@@ -69,10 +67,25 @@ function uploadFile(){
                         //alert("File " + fileName + " has been uploaded successfully!");
                         // DO USEFUL STUFF 
                         // Maybe bring up an HTML element?
+
+                        // Get the value of form elements here
+                        var x = document.getElementById("customNames");
+                        var text = "";
+
+                        for (i = 0; i < 2 ;i++) {
+                            if (i == 0){
+                                let imgFilename = x.elements[i].value
+                            }
+                            else if (i == 1){
+                                let imgCaption = x.elements[i].value
+                            }
+                        }
+                        //document.getElementById("demo").innerHTML = text;
                         
 
                         // Success Message to HTML Page
-                        txt += "Upload of " + fileName + " was successful";
+                        txt += "Upload of " + fileName + " was successful " + text;
+                        txt += "<br>Filename: " + imgFilename + "<br>Caption: " + imgCaption;
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
 
 

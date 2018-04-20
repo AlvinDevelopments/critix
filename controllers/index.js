@@ -129,7 +129,7 @@ router.post('/register', function(req, res){
 
 // Set Storage engine
 let storage = multer.diskStorage({
-  destination: './public/',
+  destination: './public/uploads/images',
   filename: function(reg,file,cb){
     cb(null,file.myImage+'-'+Date.now()+path.extname(file.originalname));
     console.log(path.extname(file.originalname));

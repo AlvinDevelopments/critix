@@ -131,9 +131,8 @@
 
     <body>
 
-
+        <!-- UPLOAD FILE HERE -->
         <button onclick="document.getElementById('id01').style.display='block'" >Upload File</button>
-        
         <div id="id01" class="modal">
             
             <form class="modal-content animate" id="customNames" >
@@ -141,24 +140,31 @@
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
         
+            <!-- User Entry-->
             <div class="container">
-                <label for="filename"><b>Username</b></label>
-                <input type="text" placeholder="Enter Filename" name="filename" required>
-        
 
+                <!-- Custom Filename -->
+                <label for="filename"><b>Post Title</b></label>
+                <input type="text" placeholder="Enter Filename" name="filename" required>
+                
+                <!-- Captions-->
                 <textarea rows="50%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
+
+                <!-- Choose File -->
                 <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
                 
-                <button type="button" id="imageFileUpload" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                <!-- Close Modal-->
+                <button type="button" id="confirmation" onclick="toDatabase()" class="cancelbtn">
                     Upload File    
                 </button>
-                        
-
+                <button type="button" id="imageFileUpload" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                    Cancel   
+                </button>
             </div>
-
             </form>
         </div>
             
+        <!-- Scripts for Modal Stuff -->
         <script>
         // Get the modal
         var modal = document.getElementById('id01');
@@ -169,22 +175,17 @@
                 modal.style.display = "none";
             }
         }
+        function closeBox(){
+            document.getElementById('id01').style.display='none'
+            modal.style.display = "none";
+        }
         </script>
-        
 
-        <!-- Rename Popup-->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
-            </div>
-
-        </div>
-
-        <!-- Just Responses after Upload-->
+        <!-- 
+        Just Responses after Upload
+        Not Needed in Final-->
         <div id="uploadResponse"></div>
+        <div id="uploadResponse2"></div>
 
     </body>
 </html>

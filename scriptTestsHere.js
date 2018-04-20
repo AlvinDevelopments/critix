@@ -1,24 +1,25 @@
 // Some Div Thing
-function rename2(){
+function toDatabase(){
 
-    document.createElement("custom");
-    document.getElementById("custom").innerHTML = "I made a new fucking button wooooo";
 
+    // Get the value of form elements here
+    var x = document.getElementById("customNames");
+    var text = "";
+    var imgFilename = "";
+    var imgCaption = "";
+
+    for (i = 0; i < 2 ;i++) {
+        if (i == 0){
+            imgFilename = x.elements[i].value;
+        }
+        else if (i == 1){
+            imgCaption = x.elements[i].value;
+        }
+    } 
+
+    document.getElementById("uploadResponse2").innerHTML = "SUCCESS";
+    document.getElementById('id01').style.display="none";
 }
-
-function rename() {
-
-    let x = document.createElement("FORM");
-    x.setAttribute("id", "myForm");
-    document.body.appendChild(x);
-
-    var y = document.createElement("INPUT");
-    y.setAttribute("type", "text");
-    y.setAttribute("value", "Donald");
-    document.getElementById("myForm").appendChild(y);
-
-}
-
 
 
 // FILE UPLOAD
@@ -65,8 +66,6 @@ function uploadFile(){
                     }
                     else{
                         //alert("File " + fileName + " has been uploaded successfully!");
-                        // DO USEFUL STUFF 
-                        // Maybe bring up an HTML element?
 
                         // Get the value of form elements here
                         var x = document.getElementById("customNames");
@@ -81,15 +80,16 @@ function uploadFile(){
                             else if (i == 1){
                                 imgCaption = x.elements[i].value;
                             }
-                        }
-                        //document.getElementById("demo").innerHTML = text;
-                        
+                        }                       
 
                         // Success Message to HTML Page
                         txt += "Upload of " + fileName + " was successful " + text;
                         txt += "<br>Filename: " + imgFilename + "<br>Caption: " + imgCaption;
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
+                        console.log("Before database push");
 
+                        // Push File Data to database
+                        document.getElementById("confirmation").onclick = toDatabase(imgFilename, imgCaption);
 
                     }
                 }

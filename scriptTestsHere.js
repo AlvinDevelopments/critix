@@ -1,5 +1,49 @@
-// Some Div Thing
-function toDatabase(){
+// SEND REGISTER TO DATABASE
+function toDatabaseRegister(){
+        // Get the value of form elements here
+        var x = document.getElementById("register");
+        var text = "";
+        var username = "";
+        var password = "";
+    
+        for (i = 0; i < 2 ;i++) {
+            if (i == 0){
+                username = x.elements[i].value;
+            }
+            else if (i == 1){
+                password = x.elements[i].value;
+            }
+        } 
+    
+        document.getElementById("uploadResponse2").innerHTML = "REGISTER SUCCESS";
+        document.getElementById('registerModal').style.display="none";
+
+}
+
+// SEND LOGIN TO DATABASE
+function toDatabaselogin(){
+    // Get the value of form elements here
+    var x = document.getElementById("login");
+    var text = "";
+    var username = "";
+    var password = "";
+
+    for (i = 0; i < 2 ;i++) {
+        if (i == 0){
+            username = x.elements[i].value;
+        }
+        else if (i == 1){
+            password = x.elements[i].value;
+        }
+    } 
+
+    document.getElementById("uploadResponse2").innerHTML = "LOGIN SUCCESS";
+    document.getElementById('registerModal').style.display="none";
+
+}
+
+// SEND UPLOADED FILE TO DATABASE
+function toDatabaseUpload(){
 
 
     // Get the value of form elements here
@@ -17,12 +61,10 @@ function toDatabase(){
         }
     } 
 
-    document.getElementById("uploadResponse2").innerHTML = "SUCCESS";
+    document.getElementById("uploadResponse2").innerHTML = "UPLOAD SUCCESS";
     document.getElementById('id01').style.display="none";
 }
 
-
-// FILE UPLOAD
 
 // Upload File
 function uploadFile(){
@@ -34,6 +76,7 @@ function uploadFile(){
     let fileType = imageFile.files[0].type;
 
     if ('files' in imageFile) {
+
         if (imageFile.files.length == 0) {
             txt = "Select one or more files.";
             document.getElementById("uploadResponse").innerHTML = "Select one or more files."; // DO WE NEED THIS?
@@ -69,7 +112,6 @@ function uploadFile(){
 
                         // Get the value of form elements here
                         var x = document.getElementById("customNames");
-                        var text = "";
                         var imgFilename = "";
                         var imgCaption = "";
 
@@ -83,13 +125,10 @@ function uploadFile(){
                         }                       
 
                         // Success Message to HTML Page
-                        txt += "Upload of " + fileName + " was successful " + text;
+                        txt += "Upload of " + fileName + " was successful ";
                         txt += "<br>Filename: " + imgFilename + "<br>Caption: " + imgCaption;
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
                         console.log("Before database push");
-
-                        // Push File Data to database
-                        document.getElementById("confirmation").onclick = toDatabase(imgFilename, imgCaption);
 
                     }
                 }

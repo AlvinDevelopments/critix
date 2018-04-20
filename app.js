@@ -6,7 +6,7 @@ const multer = require('multer');
 // const path = require('path');
 const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
-const Post = require('./lib/Post')
+// const Post = require('./models/Post')
 
 let session = require('express-session');
 

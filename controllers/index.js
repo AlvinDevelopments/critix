@@ -1,7 +1,12 @@
 // var express = require('express');
 
 var mongoose = require('mongoose');
-var User = require('../lib/User');
+
+// Models
+const User = require('../models/User');
+const Comment = require('../models/Comment');
+const Post = require('../models/Post');
+
 
 const express = require('express');
 
@@ -14,8 +19,8 @@ const multer = require('multer');
 // const path = require('path');
 // const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
-const Post = require('../lib/Post');
-const Comment = require('../lib/Comment');
+
+
 var ObjectId = require('mongodb').ObjectID;
 // const waveSurf = require('../lib/fileHandler.js');
 // const moment = require('moment');

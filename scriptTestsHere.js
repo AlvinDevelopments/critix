@@ -71,13 +71,15 @@ function uploadFile(){
                         // Get the value of form elements here
                         var x = document.getElementById("customNames");
                         var text = "";
+                        var imgFilename = "";
+                        var imgCaption = "";
 
                         for (i = 0; i < 2 ;i++) {
                             if (i == 0){
-                                let imgFilename = x.elements[i].value
+                                imgFilename = x.elements[i].value;
                             }
                             else if (i == 1){
-                                let imgCaption = x.elements[i].value
+                                imgCaption = x.elements[i].value;
                             }
                         }
                         //document.getElementById("demo").innerHTML = text;

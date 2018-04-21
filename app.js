@@ -15,6 +15,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+
 mongoose.connect('mongodb://localhost/test', function(err){
 	if(err){
 		return console.log(err)

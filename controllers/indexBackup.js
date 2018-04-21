@@ -13,36 +13,9 @@ http.listen( port, function () {
   console.log('LISTENING PORT: ', port);
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 PURE NON SOCKET.IO STUFF HERE
 */
-
-
 
 // Models
 const User = require('../models/User');

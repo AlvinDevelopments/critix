@@ -9,9 +9,26 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-//http.listen( port, function () {
-//  console.log('LISTENING PORT: ', port);
-//})
+
+app.set('view engine', 'ejs');
+
+app.use('/',express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'views')));
+app.use('/discover',express.static('./public'));
+
+http.listen( port, function () {
+  console.log('LISTENING PORT: ', port);
+})
+
+// Connection from user
+io.on('connection', function (socket) {
+
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
+
 
 
 // Models

@@ -88,11 +88,14 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.js"></script>
 <script>
+    $(do)
+
     // code for toggling sidebar menu on mobile
     $(document).ready(function(){
         $('.sidenav').sidenav();
     });
 
+    // these functions should be on the server
     $(document).ready(function() {
        $('#signup_submit').click(function() {
             if(checkPasswords()) {
@@ -128,7 +131,6 @@
             setInvalid('#confirm_pw');
             return false;
         }
-
         // else everything is OK
         setValid('#signup_pw');
         setValid('#confirm_pw');

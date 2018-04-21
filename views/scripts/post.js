@@ -1,3 +1,25 @@
+
+// Get the input field
+function setEnter(){
+
+  console.log("listening...");
+  var input = $('#comment');
+  console.log(input);
+  // Execute a function when the user releases a key on the keyboard
+  input.keydown(function(event) {
+    console.log("listening...");
+
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      console.log("DO NOT CLICK!!!");
+      // Trigger the button element with a click
+      document.getElementById("btnComment").click();
+    }
+  });
+}
+
+
 function fetchComments(id){
 
   let res = $('#comments');
@@ -6,7 +28,7 @@ function fetchComments(id){
   console.log('fetching!!!');
   // console.log(id);
   $.ajax({
-    type: 'GET',
+    type: 'POST',
     url: '/loadComments',
     data: {post_id:id},
     headers:{
@@ -17,10 +39,12 @@ function fetchComments(id){
       // res.append("LOL");
       console.log(result);
 
-      result.forEach(function(comment){
+      // this implementation may be time and resource heavy, iterating all comments....
+      res.empty();
+      result.reverse().forEach(function(comment){
         res.append(comment.comment);
         res.append('<br>');
-      })
+      });
 
     }
   });
@@ -28,7 +52,7 @@ function fetchComments(id){
 
 
 function postComment(id){
-  console.log("posting!!!");
+  console.log("posting!!!    "+id);
   // let c = $('#comment').find('input[name="comment"]').val();
   let c = $('#comment').val();
   console.log(c);
@@ -38,8 +62,10 @@ function postComment(id){
     data: {comment:c,post_id:id},
     headers:{
       'Access-Control-Allow-Origin': '*',
+      'processData': 'false',
     },
     success: function(result,status,xhr){
+      $('#comment').val('');
       let res = $('#comments');
       console.log("success!!");
       console.log(result);
@@ -47,4 +73,7 @@ function postComment(id){
       fetchComments(id);
     }
   });
+
+return false;
+
 }

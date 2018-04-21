@@ -37,23 +37,25 @@ var ObjectId = require('mongodb').ObjectID;
 // Retrieve Log In Page
 router.get('/login', function(req,res){
   res.render('login');
-})
+});
 
 // Retrieve Sign Up Page
 router.get('/signup', function(req,res){
   res.render('signup');
-})
+});
 
 
 // Retrieve Comments for post_id
-router.get('/loadComments',function(req,res){
+router.post('/loadComments',function(req,res){
 
   let format = req.query.format;
   type = req.query.type;
 
   let queryComments = Comment.find();
-  queryComments.find({'post_id':req.query.post_id});
-  console.log(req.query.post_id);
+  // queryComments.find({'post_id':req.query.post_id});
+  queryComments.find({'post_id':req.body.post_id});
+  // console.log(req.query.post_id);
+  console.log(req.body.post_id);
 
   queryComments.exec(function(err,comments){
     if(err){
@@ -71,12 +73,13 @@ router.get('/loadComments',function(req,res){
 
 // router.post('/postComment?comment=:comment&post_id=:id',function(req,res){
 router.post('/postComment',function(req,res){
+  let backURL=req.header('Referer').split('localhost/')[1] || '/';
   console.log('posting a comment');
 
   let comment = new Comment();
 
   comment.comment = req.body.comment;
-  // console.log(req);
+  console.log(req);
 comment.post_id = req.body.post_id;
   // comment.author = req.session.user.username;
 
@@ -91,9 +94,11 @@ comment.post_id = req.body.post_id;
       }
       else{
         console.log("sent to db");
+          console.log("returning to post "+backURL);
+        // res.render(backURL);
         // console.log(post);
         // res.send(comment);
-        // return res.status(200).send();
+        return res.status(200).send();
       }
     });
 
@@ -122,7 +127,8 @@ router.post('/login', function(req, res){
         }
         else if(user==null){
             // return res.status(404).send();
-            return res.render('login');
+            console.log('lol');
+            return res.render('login',{'errorMsg': 'wrong credentials'});
         }else{
 
         req.session.user = user;
@@ -276,9 +282,15 @@ router.get('/post/:_id',(req,res)=>{
     }
   });
 
-
 });
 
+//
+// // Retrieves the server filepath of a file based on post_id and displays it POST POST POST
+// router.post('/post/:_id',(req,res)=>{
+//     console.log(req.params);
+//     // res.render('/post/'+req.params._id);
+//     // res.send();
+//   });
 
 // // Post Comment
 // // Add a comment to an existing post.

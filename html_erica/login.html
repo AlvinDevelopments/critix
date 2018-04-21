@@ -9,10 +9,6 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <style>
-
-    </style>
 </head>
 
 <body onload="navLinks()">
@@ -35,44 +31,29 @@
 
 <div class="container">
     <div class="section"></div>
-    <div class="section"></div>
-    <div class="row">
-        <div class="col s12 m3">
-            <div class="thumbnail hoverable">
-                <img class="portrait" src="https://78.media.tumblr.com/0d4f34112b2a461c681594e2e45dde12/tumblr_p7g9szXG3m1wjf9lpo1_540.jpg">
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="thumbnail hoverable">
-                <img class="portrait" src="https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg">
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="thumbnail hoverable">
-                <div class="thumbnail-img-landscape">
-                    <img src="https://78.media.tumblr.com/201df481f5e8265e7029e52795a0855f/tumblr_p7if5wkhrp1tjqkbco1_540.png">
+    <div class="section">
+        <div class="row">
+            <form class="col s12 m6 offset-m3">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="login_username" type="text">
+                        <label for="login_username">Username</label>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="login_pw" type="password">
+                        <label for="login_pw">Password</label>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col s12 m3">
-            <div class="thumbnail hoverable">
-                <img src="https://78.media.tumblr.com/0ba238c9fa53bfd80a769439613e7a4a/tumblr_p75mz91kew1uhirv8o2_1280.jpg">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s12 m3">
-            <div class="thumbnail hoverable">
-                <img src="https://78.media.tumblr.com/f3bda235d2271e489de2aa9f6699c04c/tumblr_p7euxhmz6h1wcn0s5o1_1280.jpg">
-            </div>
-        </div>
-        <div class="col s12 m3">
-            <div class="thumbnail hoverable">
-                <img src="https://78.media.tumblr.com/9250279e58f4df2c97699b41eedbc30e/tumblr_p7e6uxkse51td5g4mo4_1280.jpg">
-            </div>
+        <div class="row center-align">
+            <button id ="signup_submit" class="btn brown waves-effect waves-light" type="submit">Login
+                <i class="material-icons right">send</i>
+            </button>
         </div>
     </div>
-</div>
 </div>
 
 <!--JavaScript at end of body for optimized loading-->

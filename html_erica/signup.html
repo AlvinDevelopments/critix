@@ -5,21 +5,13 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="../css/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/extra.css" media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <style>
-        .thumbnail {
-            height:300px;
-            width:300px;
-            background-size:cover;
-            background-position:center;
-        }
-    </style>
 </head>
 
-<body>
+<body onload="navLinks()">
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper brown">
@@ -27,18 +19,20 @@
             <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="signup.html">Sign up</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </div>
     </nav>
     <ul class="sidenav" id="mobilesidenav">
-        <li><a href="#">Sign in</a></li>
-        <li><a href="#">Login</a></li>
+        <li><a href="signup.html">Sign up</a></li>
+        <li><a href="login.html">Login</a></li>
     </ul>
 </div>
 
 <div class="container">
-    <div class="section"></div>
+    <div class="section center-align">
+        <span class="title ">Register</span>
+    </div>
     <div class="section">
         <div class="row">
             <form class="col s12 m6 offset-m3">
@@ -46,7 +40,7 @@
                     <div class="input-field col s6">
                         <input placeholder="e.g. iamcool69" id="signup_username" type="text" class="">
                         <label for="signup_username">Username*</label>
-                        <span class="helper-text" data-error="Cannot use this username" data-success="Username is available!"></span>
+                        <span id="signup_username_help" class="helper-text" data-error="Cannot use this username" data-success="Username is available!"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -88,48 +82,22 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="../js/materialize.js"></script>
 <script type="text/javascript" src="../js/extra.js"></script>
+<script type="text/javascript" src="../js/serverfunctions.js"></script>
 <script>
-    // these functions should be on the server
+    // server jquery function to check sign up inputs
     $(document).ready(function() {
-       $('#signup_submit').click(function() {
-            if(checkPasswords()) {
-                console.log('ok to send info to db');
-            } else {
-                console.log('smth is bad');
-            }
-       })
+        $('#signup_submit').click(function() {
+            let su = {
+                user: $('#signup_username').val(),
+                pw: $('#signup_pw').val(),
+                pwc: $('#confirm_pw').val(),
+                fname: $('#signup_fname').val(),
+                lname: $('#signup_lname').val()
+            };
+            // should send message to server to check everything
+            checkSignup(su);
+        })
     });
-
-    function checkPasswords() {
-        function setValid(id) {
-            $(id).removeClass('invalid');
-            $(id).addClass('valid');
-            $(id).prop("aria-invalid", "false");
-        }
-
-        function setInvalid(id) {
-            $(id).removeClass('valid');
-            $(id).addClass('invalid');
-            $(id).prop("aria-invalid", "true");
-        }
-
-        let pw = $('#signup_pw').val();
-        let confirm = $('#confirm_pw').val();
-
-        if( pw=== "" || confirm==="") {
-            $('#confirm_pw_help').attr("data-error", "These fields cannot be blank");
-            return false;
-        } else if (pw!==confirm) {
-            $('#confirm_pw_help').attr("data-error", "Passwords don't match");
-            setInvalid('#signup_pw');
-            setInvalid('#confirm_pw');
-            return false;
-        }
-        // else everything is OK
-        setValid('#signup_pw');
-        setValid('#confirm_pw');
-        return true;
-    }
 </script>
 </body>
 </html>

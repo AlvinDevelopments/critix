@@ -54,6 +54,7 @@ router.post('/loadComments',function(req,res){
   let queryComments = Comment.find();
   // queryComments.find({'post_id':req.query.post_id});
   queryComments.find({'post_id':req.body.post_id});
+  queryComments.select('author comment time');
   // console.log(req.query.post_id);
   console.log(req.body.post_id);
 
@@ -80,8 +81,9 @@ router.post('/postComment',function(req,res){
 
   comment.comment = req.body.comment;
   console.log(req);
-comment.post_id = req.body.post_id;
-  // comment.author = req.session.user.username;
+
+  comment.post_id = req.body.post_id;
+  comment.author = req.session.user.username;
 
   comment.time = Date.now();
 
@@ -130,7 +132,7 @@ router.post('/login', function(req, res){
             console.log('lol');
             return res.render('login',{'errorMsg': 'wrong credentials'});
         }else{
-
+          console.log("logged in! welcome "+user);
         req.session.user = user;
         return res.render('index');
       }

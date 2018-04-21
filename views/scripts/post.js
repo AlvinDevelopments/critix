@@ -42,7 +42,11 @@ function fetchComments(id){
       // this implementation may be time and resource heavy, iterating all comments....
       res.empty();
       result.reverse().forEach(function(comment){
+        res.append('<div class="user_comment">');
+        res.append('<a style="font-weight:bold;" href="/user/"'+comment.author+'">'+comment.author+'</a> ');
         res.append(comment.comment);
+        res.append('      '+comment.time.slice(0,10).replace(/-/g,"/"));
+        res.append('</div>');
         res.append('<br>');
       });
 

@@ -33,11 +33,12 @@ var app = express();
 // view engine setup EJS
 app.set('view engine', 'ejs');
 
+// app.use(session());
 app.use('/',express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use('/discover',express.static('./public'));
 // app.use('/login',express.static('./views'));
-
+app.use(session({secret:"9aduoshbj1082hd8dowhualj", resave:false, saveUninitialized:true}));
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -50,7 +51,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(session({secret:"9aduoshbj1082hd8dowhualj", resave:false, saveUninitialized:true}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/post',express.static('./views'));
@@ -73,5 +74,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

@@ -24,7 +24,7 @@ const ObjectID = require('mongodb').ObjectID;
 
 var ObjectId = require('mongodb').ObjectID;
 
-var socket = require('socket-io');
+var socket = require('socket.io');
 
 /* GET home page. */
 // router.get('/', functions.checkIfLoggedIn(), function(req, res, next) {

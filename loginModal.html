@@ -132,32 +132,30 @@
     <body>
 
         <!-- UPLOAD FILE HERE -->
-        <button onclick="document.getElementById('id01').style.display='block'" >Upload File</button>
-        <div id="id01" class="modal">
+        <button onclick="document.getElementById('loginModal').style.display='block'" >LOG IN</button>
+        <div id="loginModal" class="modal">
             
-            <form class="modal-content animate" id="customNames" >
+            <form class="modal-content animate" id="login" >
             <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
         
             <!-- User Entry-->
             <div class="container">
 
-                <!-- Custom Filename -->
-                <label for="filename"><b>Post Title</b></label>
-                <input type="text" placeholder="Enter Filename" name="filename" required>
+                <!-- Username -->
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
                 
-                <!-- Captions-->
-                <textarea rows="50%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
-
-                <!-- Choose File -->
-                <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
+                <!-- Password -->
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
                 
                 <!-- Close Modal-->
-                <button type="button" id="confirmation" onclick="toDatabase()" class="cancelbtn">
-                    Upload File    
+                <button type="button" id="loginConfirmation" onclick="toDatabaseLogin()" class="cancelbtn">
+                    LOG IN   
                 </button>
-                <button type="button" id="imageFileUpload" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">
                     Cancel   
                 </button>
             </div>
@@ -167,7 +165,7 @@
         <!-- Scripts for Modal Stuff -->
         <script>
         // Get the modal
-        var modal = document.getElementById('id01');
+        var modal = document.getElementById('loginModal');
         
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
@@ -176,7 +174,7 @@
             }
         }
         function closeBox(){
-            document.getElementById('id01').style.display='none'
+            document.getElementById('loginModal').style.display='none'
             modal.style.display = "none";
         }
         </script>
@@ -184,7 +182,6 @@
         <!-- 
         Just Responses after Upload
         Not Needed in Final-->
-        <div id="uploadResponse"></div>
         <div id="uploadResponse2"></div>
 
     </body>

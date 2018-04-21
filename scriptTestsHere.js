@@ -1,27 +1,70 @@
-// Some Div Thing
-function rename2(){
-
-    document.createElement("custom");
-    document.getElementById("custom").innerHTML = "I made a new fucking button wooooo";
+// SEND REGISTER TO DATABASE
+function toDatabaseRegister(){
+        // Get the value of form elements here
+        var x = document.getElementById("register");
+        var text = "";
+        var username = "";
+        var password = "";
+    
+        for (i = 0; i < 2 ;i++) {
+            if (i == 0){
+                username = x.elements[i].value;
+            }
+            else if (i == 1){
+                password = x.elements[i].value;
+            }
+        } 
+    
+        document.getElementById("uploadResponse2").innerHTML = "REGISTER SUCCESS";
+        document.getElementById('registerModal').style.display="none";
 
 }
 
-function rename() {
+// SEND LOGIN TO DATABASE
+function toDatabaselogin(){
+    // Get the value of form elements here
+    var x = document.getElementById("login");
+    var text = "";
+    var username = "";
+    var password = "";
 
-    let x = document.createElement("FORM");
-    x.setAttribute("id", "myForm");
-    document.body.appendChild(x);
+    for (i = 0; i < 2 ;i++) {
+        if (i == 0){
+            username = x.elements[i].value;
+        }
+        else if (i == 1){
+            password = x.elements[i].value;
+        }
+    } 
 
-    var y = document.createElement("INPUT");
-    y.setAttribute("type", "text");
-    y.setAttribute("value", "Donald");
-    document.getElementById("myForm").appendChild(y);
+    document.getElementById("uploadResponse2").innerHTML = "LOGIN SUCCESS";
+    document.getElementById('registerModal').style.display="none";
 
 }
 
+// SEND UPLOADED FILE TO DATABASE
+function toDatabaseUpload(){
 
 
-// FILE UPLOAD
+    // Get the value of form elements here
+    var x = document.getElementById("customNames");
+    var text = "";
+    var imgFilename = "";
+    var imgCaption = "";
+
+    for (i = 0; i < 2 ;i++) {
+        if (i == 0){
+            imgFilename = x.elements[i].value;
+        }
+        else if (i == 1){
+            imgCaption = x.elements[i].value;
+        }
+    } 
+
+    document.getElementById("uploadResponse2").innerHTML = "UPLOAD SUCCESS";
+    document.getElementById('id01').style.display="none";
+}
+
 
 // Upload File
 function uploadFile(){
@@ -33,6 +76,7 @@ function uploadFile(){
     let fileType = imageFile.files[0].type;
 
     if ('files' in imageFile) {
+
         if (imageFile.files.length == 0) {
             txt = "Select one or more files.";
             document.getElementById("uploadResponse").innerHTML = "Select one or more files."; // DO WE NEED THIS?
@@ -65,12 +109,9 @@ function uploadFile(){
                     }
                     else{
                         //alert("File " + fileName + " has been uploaded successfully!");
-                        // DO USEFUL STUFF 
-                        // Maybe bring up an HTML element?
 
                         // Get the value of form elements here
                         var x = document.getElementById("customNames");
-                        var text = "";
                         var imgFilename = "";
                         var imgCaption = "";
 
@@ -81,15 +122,13 @@ function uploadFile(){
                             else if (i == 1){
                                 imgCaption = x.elements[i].value;
                             }
-                        }
-                        //document.getElementById("demo").innerHTML = text;
-                        
+                        }                       
 
                         // Success Message to HTML Page
-                        txt += "Upload of " + fileName + " was successful " + text;
+                        txt += "Upload of " + fileName + " was successful ";
                         txt += "<br>Filename: " + imgFilename + "<br>Caption: " + imgCaption;
                         document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
-
+                        console.log("Before database push");
 
                     }
                 }

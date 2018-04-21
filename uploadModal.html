@@ -154,12 +154,13 @@
                 <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
                 
                 <!-- Close Modal-->
-                <button type="button" id="confirmation" onclick="toDatabase()" class="cancelbtn">
+                <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
                     Upload File    
                 </button>
-                <button type="button" id="imageFileUpload" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
+                <button type="button"  onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
                     Cancel   
                 </button>
+                <div id="uploadResponse"></div>
             </div>
             </form>
         </div>

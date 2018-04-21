@@ -71,7 +71,7 @@
 
         <style>
         body {font-family: Arial, Helvetica, sans-serif;}
-        
+
         /* Full-width input fields */
         input[type=text], input[type=password] {
             width: 100%;
@@ -81,7 +81,7 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
-        
+
         /* Set a style for all buttons */
         button {
             background-color: #4CAF50;
@@ -92,39 +92,39 @@
             cursor: pointer;
             width: 100%;
         }
-        
+
         button:hover {
             opacity: 0.8;
         }
-        
+
         /* Extra styles for the cancel button */
         .cancelbtn {
             width: auto;
             padding: 10px 18px;
             background-color: #f44336;
         }
-        
+
         /* Center the image and position the close button */
         .imgcontainer {
             text-align: center;
             margin: 24px 0 12px 0;
             position: relative;
         }
-        
+
         img.avatar {
             width: 40%;
             border-radius: 50%;
         }
-        
+
         .container {
             padding: 16px;
         }
-        
+
         span.psw {
             float: right;
             padding-top: 16px;
         }
-        
+
         /* The Modal (background) */
         .modal {
             display: none; /* Hidden by default */
@@ -139,7 +139,7 @@
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
             padding-top: 60px;
         }
-        
+
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
@@ -147,7 +147,7 @@
             border: 1px solid #888;
             width: 80%; /* Could be more or less, depending on screen size */
         }
-        
+
         /* The Close Button (x) */
         .close {
             position: absolute;
@@ -157,29 +157,29 @@
             font-size: 35px;
             font-weight: bold;
         }
-        
+
         .close:hover,
         .close:focus {
             color: red;
             cursor: pointer;
         }
-        
+
         /* Add Zoom Animation */
         .animate {
             -webkit-animation: animatezoom 0.6s;
             animation: animatezoom 0.6s
         }
-        
+
         @-webkit-keyframes animatezoom {
-            from {-webkit-transform: scale(0)} 
+            from {-webkit-transform: scale(0)}
             to {-webkit-transform: scale(1)}
         }
-            
+
         @keyframes animatezoom {
-            from {transform: scale(0)} 
+            from {transform: scale(0)}
             to {transform: scale(1)}
         }
-        
+
         /* Change styles for span and cancel button on extra small screens */
         @media screen and (max-width: 300px) {
             span.psw {
@@ -198,42 +198,42 @@
         <!-- UPLOAD FILE HERE -->
         <button onclick="document.getElementById('id01').style.display='block'" >Upload File</button>
         <div id="id01" class="modal">
-            
+
             <form class="modal-content animate" id="customNames" >
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
-        
+
             <!-- User Entry-->
             <div class="container">
 
                 <!-- Custom Filename -->
                 <label for="filename"><b>Post Title</b></label>
                 <input type="text" placeholder="Enter Filename" name="filename" required>
-                
+
                 <!-- Captions-->
                 <textarea rows="10%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
 
                 <!-- Choose File -->
                 <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
-                
+
                 <!-- Close Modal-->
                 <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
-                    Upload File    
+                    Upload File
                 </button>
                 <button type="button"  onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
-                    Cancel   
+                    Cancel
                 </button>
                 <div id="uploadResponse"></div>
             </div>
             </form>
         </div>
-            
+
         <!-- Scripts for Modal Stuff -->
         <script>
         // Get the modal
         var modal = document.getElementById('id01');
-        
+
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
@@ -246,7 +246,7 @@
         }
         </script>
 
-        <!-- 
+        <!--
         Just Responses after Upload
         Not Needed in Final-->
         <div id="uploadResponse"></div>

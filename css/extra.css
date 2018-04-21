@@ -3,6 +3,17 @@
     bottom: 0px !important ;
 }
 
+.modal-post-content {
+    height:inherit;
+}
+
+.modal-img {
+    max-height:600px;
+    max-width:100%;
+    width:auto;
+    object-fit: contain;
+}
+
 /*
     code to create thumbnails:
         https://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
@@ -37,3 +48,14 @@
     height:auto !important;
 }
 
+.post-username a {
+    font-weight: bold;
+}
+
+.post-username a:before {
+    content: "@";
+}
+
+.post-username a:after {
+    content:": ";
+}

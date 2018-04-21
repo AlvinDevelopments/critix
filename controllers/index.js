@@ -286,54 +286,6 @@ router.get('/post/:_id',(req,res)=>{
 
 });
 
-//
-// // Retrieves the server filepath of a file based on post_id and displays it POST POST POST
-// router.post('/post/:_id',(req,res)=>{
-//     console.log(req.params);
-//     // res.render('/post/'+req.params._id);
-//     // res.send();
-//   });
-
-// // Post Comment
-// // Add a comment to an existing post.
-// router.post('/comment',(req,res)=>{
-//   let comment = new Comment();
-//
-//   let link = req.headers.referer;
-//   let parsed = link.split('/');
-//   let id = parsed[parsed.length-1];
-//   comment.post_id = id;
-//   console.log(id);
-//   comment.comment = req.body.comment;
-//   // comment.author = req.session.user.username;
-//   // comment.post_id = req;
-//   comment.date = Date.now();
-//
-//   comment.save(function(err){
-//     if(err){
-//       console.log("FAILED");
-//       console.log(err);
-//       // return res.status(500).send();
-//     }
-//     else{
-//       console.log("sent to db");
-//       // console.log(post);
-//       // res.status(200).send({
-//       //   comment: comment
-//       // });
-//       // console.log(req);
-//       // res.redirect('/post/undefined-1523845557148.png',{
-//       //   comment: comment
-//       // });
-//
-//       let link = req.headers.referer;
-//
-//       res.redirect(link);
-//
-//     }
-//   });
-// });
-
 
 
 // Displays all posts uploaded

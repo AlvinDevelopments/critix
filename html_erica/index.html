@@ -11,9 +11,17 @@
 
     <style>
         /*
-        code to create thumbnails: https://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
-        code to create dynamically sized thumbnails: https://css-tricks.com/aspect-ratio-boxes/
+        code to create thumbnails:
+            https://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
+        code to create dynamically sized thumbnails:
+            https://css-tricks.com/aspect-ratio-boxes/
+            http://jsfiddle.net/webtiki/MpXYr/2/
         */
+
+        .navbar-fixed{
+            position:absolute !important ;
+            bottom: 0px !important ;
+        }
 
         .thumbnail {
             overflow: hidden;
@@ -21,6 +29,7 @@
             width: 100%;
             height:0;
             padding-bottom:100%;
+            margin:1%;
         }
 
         /* assumes they're landscape photos by default */

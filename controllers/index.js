@@ -30,23 +30,23 @@ var ObjectId = require('mongodb').ObjectID;
 
 
 /* GET home page. */
-// router.get('/', function(req, res, next) {
+// router.get('/', functions.checkIfLoggedIn(), function(req, res, next) {
 //     res.render('index', { title: 'Express' });
 // });
 
 // Retrieve Log In Page
-router.get('/login', function(req,res){
+router.get('/login', functions.checkIfLoggedInRedirect(), function(req,res){
   res.render('login');
 });
 
 // Retrieve Sign Up Page
-router.get('/signup', function(req,res){
+router.get('/signup', functions.checkIfLoggedInRedirect(), function(req,res){
   res.render('signup');
 });
 
 
 // Retrieve Comments for post_id
-router.post('/loadComments',function(req,res){
+router.post('/loadComments', functions.checkIfLoggedIn(), function(req,res){
 
   let format = req.query.format;
   type = req.query.type;
@@ -72,8 +72,8 @@ router.post('/loadComments',function(req,res){
 
 });
 
-// router.post('/postComment?comment=:comment&post_id=:id',function(req,res){
-router.post('/postComment',function(req,res){
+// router.post('/postComment?comment=:comment&post_id=:id', functions.checkIfLoggedIn(), function(req,res){
+router.post('/postComment', functions.checkIfLoggedIn(), function(req,res){
   let backURL=req.header('Referer').split('localhost/')[1] || '/';
   console.log('posting a comment');
 
@@ -108,13 +108,13 @@ router.post('/postComment',function(req,res){
 });
 
 
-router.get('/test',function(req,res){
+router.get('/test', functions.checkIfLoggedIn(), function(req,res){
   console.log('console log of the test.');
   res.send('hi, this is a test!');
 });
 
 // Submit Login Credentials
-router.post('/login', function(req, res){
+router.post('/login', functions.checkIfLoggedInRedirect(), function(req, res){
     console.log(req);
     var username = req.body.username;
     var password = req.body.password;
@@ -134,13 +134,13 @@ router.post('/login', function(req, res){
         }else{
           console.log("logged in! welcome "+user);
         req.session.user = user;
-        return res.render('index');
+        return res.redirect('/');
       }
     });
 
 });
 
-router.get('/dashboard', function(req, res){
+router.get('/dashboard', functions.checkIfLoggedIn(), function(req, res){
     if(!req.session.user){
         //return res.status(401).send();
         return res.redirect('/login');
@@ -149,19 +149,19 @@ router.get('/dashboard', function(req, res){
     return res.status(200).send("Welcome");
 })
 
-router.get('/logout', function(req, res){
+router.get('/logout', functions.checkIfLoggedIn(), function(req, res){
     req.session.destroy();
     return res.status(200).send();
 })
 
 // Retrieve registration page
-router.get('/register', function(req, res){
+router.get('/register', functions.checkIfLoggedInRedirect(), function(req, res){
   res.render('signup');
 });
 
 
 // Submit registration request
-router.post('/register', function(req, res){
+router.post('/register', functions.checkIfLoggedInRedirect(), function(req, res){
     var username = req.body.username;
     var password = req.body.password;
     console.log(username);
@@ -184,7 +184,7 @@ router.post('/register', function(req, res){
 // Alvin's stuff below--------
 
 // loads login page
-// router.post('/login',authenticateCredentials(),function(req,res){
+// router.post('/login',authenticateCredentials(), functions.checkIfLoggedIn(), function(req,res){
 //   // res.render('home');
 // });
 
@@ -193,7 +193,7 @@ router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index'));
 
 
 // Render Upload page
-router.get('/upload',function(req,res){
+router.get('/upload', functions.checkIfLoggedIn(), function(req,res){
   res.render('upload');
 });
 
@@ -337,7 +337,7 @@ router.get('/post/:_id',(req,res)=>{
 
 
 // Displays all posts uploaded
-router.get('/discover',function(req,res){
+router.get('/discover', functions.checkIfLoggedIn(), function(req,res){
   let query = Post.find();
   query.select('_id post_id');
 

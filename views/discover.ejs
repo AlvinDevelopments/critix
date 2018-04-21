@@ -5,25 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tattune | View Your Music</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/extra.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="/css/main.css"> -->
+    <!-- <link rel="stylesheet" href="/css/extra.css"> -->
+    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script> -->
+    <!-- <link type="text/css" rel="stylesheet" href="/css/materialize.css"  media="screen,projection"/> -->
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 </head>
-<body>
+  <body>
 
-<div class="center">
-<div class="posts">
-  <% posts.forEach(function(post){ %>
-  <div class="containerz">
-    <a  href="/post/<%= typeof post._id.toString() !='undefined' ? post._id.toString():''%>"> <img class="post" src="/uploads/images/<%= typeof post.post_id !='undefined' ? post.post_id:''%>" type="image/<%= filetype %>"></a>
+  <div class="center">
+  <div class="posts">
+    <% posts.forEach(function(post){ %>
+    <div class="containerz">
+      <a  href="/post/<%= typeof post._id.toString() !='undefined' ? post._id.toString():''%>"> <img class="post" src="/uploads/images/<%= typeof post.post_id !='undefined' ? post.post_id:''%>" type="image/<%= filetype %>"></a>
+    </div>
+    <% }); %>
+
   </div>
-  <% }); %>
 
-</div>
-
-</div>
-
-</body>
+  </div>
 
 
+
+  <div class="navbar-fixed">
+      <nav>
+          <div class="nav-wrapper brown">
+              <a href="/" class="brand-logo center">Critix</a>
+              <a href="/" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a href="/signup">Sign up</a></li>
+                  <!-- <li><a onclick="document.getElementById('loginModal').style.display='inline-block'" href="#">Login</a></li> -->
+                  <li><button onclick="document.getElementById('loginModal').style.display='inline-block'">Login</button></li>
+              </ul>
+          </div>
+      </nav>
+      <ul class="sidenav" id="mobilesidenav">
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Login</a></li>
+      </ul>
+  </div>
+
+  </body>
 </html>

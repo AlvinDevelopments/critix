@@ -44,9 +44,14 @@ io.on('connection', function (socket) {
 // });
 
 // Retrieve Log In Page
-router.get('/login', functions.checkIfLoggedInRedirect(), function(req,res){
-  res.render('login');
-});
+// router.get('/login', functions.checkIfLoggedInRedirect(), function(req,res){
+//   res.render('login');
+// });
+
+// Retrieve Log In form
+// router.get('/login_form', functions.checkIfLoggedInRedirect(), function(req,res){
+//   res.render('login_form');
+// });
 
 // Retrieve Sign Up Page
 router.get('/signup', functions.checkIfLoggedInRedirect(), function(req,res){
@@ -124,7 +129,8 @@ router.get('/test', functions.checkIfLoggedIn(), function(req,res){
 
 // Submit Login Credentials
 router.post('/login', functions.checkIfLoggedInRedirect(), function(req, res){
-    console.log(req);
+  console.log('checking login...');
+    // console.log(req);
     var username = req.body.username;
     var password = req.body.password;
     console.log(username);
@@ -138,25 +144,30 @@ router.post('/login', functions.checkIfLoggedInRedirect(), function(req, res){
         }
         else if(user==null){
             // return res.status(404).send();
-            console.log('lol');
-            return res.render('login',{'errorMsg': 'wrong credentials'});
+            console.log('not correct');
+            // return res.render('login',{'errorMsg': 'wrong credentials'});
+            return res.status(500).send({'errorMsg': 'wrong credentials'});
+            // return res.render('discover');
+            // return res.status(200).send();
+
         }else{
           console.log("logged in! welcome "+user);
-        req.session.user = user;
-        return res.redirect('/');
+          req.session.user = user;
+          // res.send({'errorMsg': 'success'});
+          return res.status(200).send({'page':'discover'});
       }
     });
 
 });
 
-router.get('/dashboard', functions.checkIfLoggedIn(), function(req, res){
-    if(!req.session.user){
-        //return res.status(401).send();
-        return res.redirect('/login');
-    }
-
-    return res.status(200).send("Welcome");
-})
+// router.get('/dashboard', functions.checkIfLoggedIn(), function(req, res){
+//     if(!req.session.user){
+//         //return res.status(401).send();
+//         return res.redirect('/login');
+//     }
+//
+//     return res.status(200).send("Welcome");
+// })
 
 router.get('/logout', functions.checkIfLoggedIn(), function(req, res){
     req.session.destroy();
@@ -198,7 +209,28 @@ router.post('/register', functions.checkIfLoggedInRedirect(), function(req, res)
 // });
 
 // Renders the main page if user is logged in.
-router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index'));
+router.get('/',function(req,res){
+  let query = Post.find();
+  query.select('_id post_id');
+
+  query.exec(function(err,posts){
+    if(err){
+      res.render('index',{
+        msg: err
+      });
+    }
+    else{
+      // console.log(posts);
+
+      res.render('index',{
+        posts: posts,
+        filetype: 'jpg'
+      });
+    }
+  });
+}
+);
+// router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index'));
 
 
 // Render Upload page
@@ -231,10 +263,6 @@ router.post('/upload',(req,res)=>{
         });
       }
       else{
-        res.render('index',{
-          msg: 'File Uploaded!',
-          // file: `${req.file.filename}`
-        });
 
         let post = new Post();
         let title = req.title;
@@ -254,9 +282,12 @@ router.post('/upload',(req,res)=>{
             else{
               console.log("sent to db");
               console.log(post);
-              return res.status(200).send();
+              res.render('post',{'file':post, 'filetype':'jpg'});
             }
           });
+
+
+
 
       }
     }

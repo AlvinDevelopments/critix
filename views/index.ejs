@@ -1,126 +1,192 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tattune | View Your Music</title>
+    <!-- <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/extra.css"> -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
+
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/extra.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link type="text/css" rel="stylesheet" href="/css/main.css"/> -->
 
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <style>
-        .thumbnail {
-            height:300px;
-            width:300px;
-            background-size:cover;
-            background-position:center;
-        }
-
-        .navbar-fixed{
-          position:absolute !important ;
-          bottom: 0px !important ;
-        }
-
-    </style>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
 </head>
+<body onload="setup()">
 
-<body>
-<div class="navbar-fixed">
-    <nav>
-        <div class="nav-wrapper brown">
-            <a href="index.html" class="brand-logo center">Critix</a>
-            <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="signup.html">Sign up</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
-        </div>
-    </nav>
-    <ul class="sidenav" id="mobilesidenav">
-        <li><a href="#">Sign in</a></li>
-        <li><a href="#">Login</a></li>
-    </ul>
+
+
+<div style="height:100vh; margin:0px 0px 0px 0px ; width:100vw; " class="limiter">
+
+  <div style="width:100%; margin:0% 0% 0% 6% ; padding: 0px; height:100%; overflow-y:auto"class="csontainer">
+
+    <div class="row">
+      <% posts.forEach(function(post){ %>
+         <div class="col s4">
+           <div class="containerz">
+           <a  href="/post/<%= typeof post._id.toString() !='undefined' ? post._id.toString():''%>">
+             <img class="post" src="/uploads/images/<%= typeof post.post_id !='undefined' ? post.post_id:''%>" type="image/<%= filetype %>">
+           </a>
+         </div>
+         </div>
+      <%});%>
+         </div>
+
+       </div>
+
 </div>
 
-    <div class="container">
-        <div class="section">
-            <div class="row">
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/0d4f34112b2a461c681594e2e45dde12/tumblr_p7g9szXG3m1wjf9lpo1_540.jpg)"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg)"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/e3c82ed9bb78f9a32a28009436c6dc16/tumblr_p7fx4akjll1uxvfs7o1_540.jpg)"></div>
-                            <img src="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/0ba238c9fa53bfd80a769439613e7a4a/tumblr_p75mz91kew1uhirv8o2_1280.jpg)"></div>
-                            <img src="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/f3bda235d2271e489de2aa9f6699c04c/tumblr_p7euxhmz6h1wcn0s5o1_1280.jpg)"></div>
-                            <img src="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/9250279e58f4df2c97699b41eedbc30e/tumblr_p7e6uxkse51td5g4mo4_1280.jpg)"></div>
-                            <img src="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/eb5f61da5242e241c891b36bdbaf24fc/tumblr_p7e6uxkse51td5g4mo6_1280.jpg)"></div>
-                            <img src="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m3">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <div class="thumbnail" style="background-image:url(https://78.media.tumblr.com/bb2dd0442a29ed374c158b0924431ec2/tumblr_p7e4pgVL2x1rjuzczo1_1280.jpg)"></div>
-                            <img src="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+
+
+  <!-- UPLOAD MODAL CODE -->
+
+
+  <!-- UPLOAD FILE HERE -->
+  <!-- <button onclick="document.getElementById('loginModal').style.display='block'" >LOG IN</button> -->
+<!-- <div style="position:relative; height:1"> -->
+  <div id="loginModal" class="modal">
+      <div class="modal-content animate" id="login" >
+      <div class="imgcontainer">
+          <span onclick="document.getElementById('loginModal').style.display='none';" class="close" title="Close Modal">&times;</span>
+      </div>
+      <!-- <div id='errorMsg'></div> -->
+
+      <!-- User Entry-->
+      <div id="response">hello world!</div>
+      <div class="container login_box">
+        <form>
+          <section class="section">
+              <div class="container">
+                  <div class="level is-marginless">
+                      <div class="level-item">
+                          <h1 class="title is-1">Login</h1>
+                      </div>
+                  </div>
+              </div>
+          </section>
+
+          <div class="section">
+              <div class="container" style="max-width:250px;">
+                <!-- <form action='/login' method='post'> -->
+                <form>
+                  <!-- username -->
+                  <div class="field">
+                      <p class="control has-icons-left">
+                          <input class="input" id="u" name="username" type="username" placeholder="username"></input>
+                          <span class="icon is-small is-left">
+                              <i class="fas fa-user"></i>
+                          </span>
+                      </p>
+                  </div>
+
+                  <!-- password -->
+                  <div class="field">
+                      <div class="control has-icons-left">
+                          <input class="input" id="p" name="password" type="password" placeholder="password"></input>
+                          <span class="icon is-small is-left">
+                              <i class="fas fa-lock"></i>
+                          </span>
+                      </div>
+                  </div>
+
+                  <!-- login button -->
+                  <div class="level is-marginless">
+                      <div class="level-item">
+                          <div class="field has-text-centered">
+                              <div class="control">
+                                  <button type="submit" id="submit" class="button is-primary">SUBMIT</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                </form>
+                  <div class="level is-marginless">
+                      <div class="level-item">
+                          <p class="help">or Sign Up <a href="/signup">here</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+        </form>
+      </div>
     </div>
+  </div>
+<!-- </di v> -->
+
+
+
+  <!--
+  Just Responses after Upload
+  Not Needed in Final-->
+  <div id="uploadResponse2"></div>
+
+
+  <div class="navbar-fixed">
+      <nav>
+          <div class="nav-wrapper">
+              <a href="/" class="brand-logo center">Critix</a>
+              <a href="/" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a href="/signup">Sign up</a></li>
+                  <li><a onclick="document.getElementById('loginModal').style.display='inline-block'" href="#">Login</a></li>
+                  <li><a href="/discover">Discover</a></li>
+                  <li><a href="/upload">Upload</a></li>
+                  <!-- <li><button onclick="document.getElementById('loginModal').style.display='inline-block'">Login</button></li> -->
+              </ul>
+          </div>
+      </nav>
+      <ul class="sidenav" id="mobilesidenav">
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Login</a></li>
+      </ul>
+  </div>
+
+  </body>
+
+
+
+  <!-- Scripts for Modal Stuff -->
+  <script>
+  // Get the modal
+  var modal = document.getElementById('loginModal');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  function closeBox(){
+      document.getElementById('loginModal').style.display='none'
+      modal.style.display = "none";
+  }
+  </script>
+
+
+
+
 
 <!--JavaScript at end of body for optimized loading-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="/scripts/materialize.js"></script>
 <script>
     $(document).ready(function(){
         $('.sidenav').sidenav();
     });
 </script>
-</body>
+
 </html>

@@ -13,16 +13,8 @@ http.listen( port, function () {
   console.log('LISTENING PORT: ', port);
 })
 
-app.use(express.static(__dirname + '/public'));
-
-app.get('/',(req, res) => {
-  res.render('index')
-})
 
 
-io.on('connection', function(socket){
-  console.log('BROWSER CONNECTED');
-})
 
 
 
@@ -61,7 +53,7 @@ const Post = require('../models/Post');
 let functions = require('../lib/functions');
 
 
-//const express = require('express');
+const express = require('express');
 
 var router = express.Router();
 

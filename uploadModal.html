@@ -1,69 +1,5 @@
+<!DOCTYPE html>
 <html>
-
-<<<<<<< HEAD
-<head>
-</head>
-<body><a href="/discover">DISCOVER</a>
-        <header>
-            <h2>Pure HTML5 file upload</h2>
-        </header>
-        <div class="container">
-            <div class="contr"><h2>You can select the file (image) and click Upload button</h2></div>
-
-            <div class="upload_form_cont">
-                <form id="upload_form" enctype="multipart/form-data" method="POST" action="/upload">
-                    <div>
-                        <div><label for="image_file">Please select image file</label></div>
-                        <div><input name="image_file" type="file"  d="image_file" /></div>
-                    </div>
-                    <div class="row">
-                         <div class="row">
-                           <div class="input-field col s12">
-                              <input name="title" type="text"  id="title" class="materialize-textarea">
-                             <label for="textarea1">Title</label>
-                          </div>
-                        </div>
- </div>
- <div class="row">
-     <div class="row">
-       <div class="input-field col s12">
-         <input type="text" name="author" id="author" class="materialize-textarea">
-         <label for="textarea2">Author</label>
-       </div>
-     </div>
- </div>
-                    <div>
-                        <button type="submit">Upload</button>
-                    </div>
-                    <div id="fileinfo">
-                        <div id="filename"></div>
-                        <div id="filesize"></div>
-                        <div id="filetype"></div>
-                        <div id="filedim"></div>
-                    </div>
-                    <!-- <div id="error">You should select valid image files only!</div>
-                    <div id="error2">An error occurred while uploading the file</div>
-                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
-                    <div id="warnsize">Your file is very big. We can't accept it. Please select more small file</div> -->
-
-                    <div id="progress_info">
-                        <div id="progress"></div>
-                        <div id="progress_percent">&nbsp;</div>
-                        <div class="clear_both"></div>
-                        <div>
-                            <div id="speed">&nbsp;</div>
-                            <div id="remaining">&nbsp;</div>
-                            <div id="b_transfered">&nbsp;</div>
-                            <div class="clear_both"></div>
-                        </div>
-                        <div id="upload_response"></div>
-                    </div>
-                </form>
-
-                <img id="preview" />
-            </div>
-        </div>
-=======
     <head>
         <script src="scriptTestsHere.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -208,11 +144,11 @@
             <div class="container">
 
                 <!-- Custom Filename -->
-                <label for="filename"><b>Post Title</b></label>
-                <input type="text" placeholder="Enter Filename" name="filename" required>
+                <label for="upload_title"><b>Post Title</b></label>
+                <input type="text" placeholder="Enter Filename" name="upload_title" required>
                 
                 <!-- Captions-->
-                <textarea rows="10%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
+                <textarea rows="50%" cols="100%" name="upload_caption" form="customNames" required>Enter caption...</textarea>
 
                 <!-- Choose File -->
                 <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
@@ -252,9 +188,5 @@
         <div id="uploadResponse"></div>
         <div id="uploadResponse2"></div>
 
->>>>>>> 962be5d4d3d535481b8d93f7e2df1242bd6b582a
     </body>
-
-
-
 </html>

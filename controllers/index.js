@@ -17,14 +17,14 @@ var router = express.Router();
 
 const ejs = require('ejs');
 var path = require('path');
-// const bodyParser = require('body-parser');
+
 const multer = require('multer');
-// const path = require('path');
-// const mongoose = require('mongoose');
+
 const ObjectID = require('mongodb').ObjectID;
 
-
 var ObjectId = require('mongodb').ObjectID;
+
+var socket = require('socket-io');
 
 /* GET home page. */
 // router.get('/', functions.checkIfLoggedIn(), function(req, res, next) {

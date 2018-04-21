@@ -25,9 +25,6 @@ const ObjectID = require('mongodb').ObjectID;
 
 
 var ObjectId = require('mongodb').ObjectID;
-// const waveSurf = require('../lib/fileHandler.js');
-// const moment = require('moment');
-
 
 /* GET home page. */
 // router.get('/', functions.checkIfLoggedIn(), function(req, res, next) {

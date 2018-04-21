@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <style>
+        .thumbnail {
+            height:300px;
+            width:300px;
+            background-size:cover;
+            background-position:center;
+        }
+    </style>
+</head>
+
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper brown">
+            <a href="index.html" class="brand-logo center">Critix</a>
+            <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="signup.html">Sign up</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobilesidenav">
+        <li><a href="#">Sign in</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="section"></div>
+    <div class="section">
+        <div class="row">
+            <form class="col s12 m6 offset-m3">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="e.g. iamcool69" id="signup_username" type="text" class="">
+                        <label for="signup_username">Username*</label>
+                        <span class="helper-text" data-error="Cannot use this username" data-success="Username is available!"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="signup_pw" type="password" class="">
+                        <label for="signup_pw">Password*</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="confirm_pw" type="password" class="" onchange="">
+                        <label for="confirm_pw">Confirm Password*</label>
+                        <span id="confirm_pw_help" class="helper-text" data-success="OK"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="First Name" id="signup_fname" type="text">
+                        <label for="signup_fname">Full Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Last Name" id="signup_lname" type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <sub>* required fields</sub>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row center-align">
+            <button id ="signup_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.js"></script>
+<script>
+    // code for toggling sidebar menu on mobile
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+
+    $(document).ready(function() {
+       $('#signup_submit').click(function() {
+            if(checkPasswords()) {
+                console.log('ok to send info to db');
+            } else {
+                console.log('smth is bad');
+            }
+       })
+    });
+
+    function checkPasswords() {
+        function setValid(id) {
+            $(id).removeClass('invalid');
+            $(id).addClass('valid');
+            $(id).prop("aria-invalid", "false");
+        }
+
+        function setInvalid(id) {
+            $(id).removeClass('valid');
+            $(id).addClass('invalid');
+            $(id).prop("aria-invalid", "true");
+        }
+
+        let pw = $('#signup_pw').val();
+        let confirm = $('#confirm_pw').val();
+
+        if( pw=== "" || confirm==="") {
+            $('#confirm_pw_help').attr("data-error", "These fields cannot be blank");
+            return false;
+        } else if (pw!==confirm) {
+            $('#confirm_pw_help').attr("data-error", "Passwords don't match");
+            setInvalid('#signup_pw');
+            setInvalid('#confirm_pw');
+            return false;
+        }
+
+        // else everything is OK
+        setValid('#signup_pw');
+        setValid('#confirm_pw');
+        return true;
+    }
+</script>
+</body>
+</html>

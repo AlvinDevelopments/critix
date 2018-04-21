@@ -3,10 +3,6 @@
     bottom: 0px !important ;
 }
 
-.modal-post-content {
-    height:inherit;
-}
-
 .modal-img {
     max-height:600px;
     max-width:100%;

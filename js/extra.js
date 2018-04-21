@@ -11,9 +11,7 @@ function critixInit() {
 
 // toggle modal
     var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, {opacity: 0.8});
-
-    //var instance = M.Modal.getInstance(elem);
+    var instance = M.Modal.init(elem, {opacity: 0.8, onOpenStart: loadCaption()});
 
 // toggle materialbox
     $(document).ready(function(){
@@ -43,17 +41,30 @@ function navLinks() {
     }
 }
 
+// runs when loading modal_post
+// toggles truncated caption if caption > 140 characters
+function loadCaption() {
+    let len = $('#caption').text().length;
+    if(len>140) {
+        $('#caption').addClass('truncate');
+    }
+}
+
+// toggles readmore button and truncates/expands caption
 function readMore() {
     let trunc = $('#caption').hasClass('truncate');
-    if(!trunc) {
+    if(!trunc) { //caption is expanded
+        //caption will be truncated
         $('#readmore').text("Read more");
-    } else {
+    } else { //caption is truncated
+        // caption will be expanded
         $('#readmore').text("Read less");
     }
-
     $('#caption').toggleClass('truncate');
 
 }
+
+var print = console.log.bind(console);
 
 
 

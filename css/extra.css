@@ -4,8 +4,7 @@
 }
 
 #modal_post {
-    max-height:90% !important;
-    --width:80% !important;
+    --max-height:70% !important;
 }
 
 /*
@@ -44,7 +43,7 @@
 
 .post-username a {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     display:block;
 }
 
@@ -53,6 +52,6 @@
 }
 
 .post-caption {
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: block;
 }

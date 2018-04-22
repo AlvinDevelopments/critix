@@ -37,7 +37,7 @@
         <div class="col s12 m3">
             <div id="post1" class="thumbnail hoverable" onclick="loadModalImg('#post1')">
                 <a class="modal-trigger" href="#modal_post">
-                    <img class="portrait" src="https://78.media.tumblr.com/0d4f34112b2a461c681594e2e45dde12/tumblr_p7g9szXG3m1wjf9lpo1_540.jpg">
+                    <img src="http://hdqwalls.com/wallpapers/nature-photography-2.jpg">
                 </a>
             </div>
         </div>
@@ -81,18 +81,18 @@
     </div>
 </div>
 
-<div id="modal_post" class="modal">
-    <div class=" modal-content" style="height:inherit;">
+<div id="modal_post" class="modal modal-fixed-footer">
+    <div class="modal-content">
         <div class="row" style="max-height:inherit;">
             <div class="col s12 m8" style="max-height:inherit;">
-                <div id="post_img" style="display:flex; align-items:center; justify-content: center;">
-                    <img class="materialboxed" style="max-height:500px;max-width:100%;" src="https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg">
+                <div id="post_img">
+                    <img class="materialboxed" style="max-width:100%;" src="https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg">
                 </div>
             </div>
             <div class="col s12 m4" style="max-height:inherit;">
                 <div id="post_info">
                     <div class="section">
-                        <span class="post-username"><a class="brown-text">user</a></span>
+                        <span class="post-username"><a class="brown-text">username</a></span>
                     </div>
                     <div class="divider"></div>
                     <div class="section">
@@ -100,9 +100,16 @@
                         <br>
                         <a id="readmore" class="brown-text" onclick="toggleReadMore()"></a>
                     </div>
+                    <div class="divider"></div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn-flat modal-action modal-close brown-text" title="Close">
+            <i class="material-icons">close</i>
+        </button>
     </div>
 </div>
 

@@ -3,23 +3,28 @@ loggedIn = false;
 
 // function to run all initialization functions
 function critixInit() {
-
-    // toggle sidebar menu on mobile
+// toggle sidebar menu on mobile
     $(document).ready(function(){
         $('.sidenav').sidenav();
     });
 
-// toggle modal plugin
-    let elem = document.querySelector('.modal');
+// init modal plugin
+    let modalelem = document.querySelector('.modal');
     let modalpost = document.querySelector('#modal_post');
-    let inst_modalpost = M.Modal.init(modalpost, {opacity: 0.8, onOpenEnd: loadCaption()});
-    let inst_elem = M.Modal.init(elem, {opacity: 0.8});
+    let inst_elem = M.Modal.init(modalelem, {opacity: 0.8}); // load default presets
+    // override now for separate modals
+    let inst_modalpost = M.Modal.init(modalpost, {onOpenEnd: loadCaption(), dismissible: false});
 
-// toggle materialbox plugin
+// init materialbox plugin
     $(document).ready(function(){
         $('.materialboxed').materialbox();
     });
 
+// init tooltip plugin
+    let tooltipelem = document.querySelector('.tooltipped');
+    var inst_tooltip = M.Tooltip.init(tooltipelem, {});
+
+// populate navbar with links
     navLinks();
 }
 
@@ -45,9 +50,13 @@ function navLinks() {
 
 // grabs img src url from thumbnail and sets it as src for #post_img
 function loadModalImg(thumb_id) {
-    let img = $(thumb_id).children().children().attr('src');
-    print(img);
-    $('#post_img').children().children().attr('src',img);
+    let img = $(thumb_id).children().children();
+    let src = img.attr('src');
+    print(src);
+
+    print($('#post_img').children().attr('src'));
+    $('#post_img').children().children().attr('src',src);
+    print($('#post_img').children().attr('src'));
 }
 
 // runs when loading modal_post

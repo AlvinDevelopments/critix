@@ -34,7 +34,7 @@
 
                     <div class="level is-marginless">
                             <div class="level-item">
-                                    <p class="help"><%= typeof errorMsg !='undefined' ? errorMsg:''%> </p>
+                                    <p class="help" id="errorMsg" style="color: red;"><%= typeof errorMsg !='undefined' ? errorMsg:''%> </p>
                             </div>
                     </div>
                 
@@ -173,14 +173,21 @@
             
     </div>
     
-   
-
-    
-    
-
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/scripts/materialize.js"></script>
     <script type="text/javascript" src="/scripts/extra.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("Error msg length " + document.getElementById("errorMsg").innerHTML);
+            if(document.getElementById("errorMsg").innerHTML.trim() != ""){
+                $('#loginModal').modal("open");
+            }       
+        });
+        
+   </script>
+
+
 </body>
 </html>

@@ -28,6 +28,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('.modal').modal();
+//    $('.modal').modal("open");
   });
 
 var password = document.getElementById("signup_pw")

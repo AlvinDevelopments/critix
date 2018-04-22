@@ -3,11 +3,9 @@
     bottom: 0px !important ;
 }
 
-.modal-img {
-    max-height:600px;
-    max-width:100%;
-    width:auto;
-    object-fit: contain;
+#modal_post {
+    max-height:90% !important;
+    --width:80% !important;
 }
 
 /*
@@ -46,12 +44,15 @@
 
 .post-username a {
     font-weight: bold;
+    font-size: 1.2rem;
+    display:block;
 }
 
 .post-username a:before {
     content: "@";
 }
 
-.post-username a:after {
-    content:": ";
+.post-caption {
+    font-size: 1rem;
+    display: block;
 }

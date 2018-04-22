@@ -35,28 +35,28 @@
     <div class="section"></div>
     <div class="row">
         <div class="col s12 m3">
-            <div class="thumbnail hoverable">
+            <div id="post1" class="thumbnail hoverable" onclick="loadModalImg('#post1')">
                 <a class="modal-trigger" href="#modal_post">
                     <img class="portrait" src="https://78.media.tumblr.com/0d4f34112b2a461c681594e2e45dde12/tumblr_p7g9szXG3m1wjf9lpo1_540.jpg">
                 </a>
             </div>
         </div>
-        <div id ="post2" class="col s12 m3">
-            <div class="thumbnail hoverable">
+        <div class="col s12 m3">
+            <div id="post2" class="thumbnail hoverable" onclick="loadModalImg('#post2')">
                 <a class="modal-trigger" href="#modal_post">
                     <img class="portrait" src="https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg">
                 </a>
             </div>
         </div>
         <div class="col s12 m3">
-            <div id="post3"  class="thumbnail hoverable">
+            <div id="post3"  class="thumbnail hoverable" onclick="loadModalImg('#post3')">
                 <a class="modal-trigger" href="#modal_post">
                     <img src="https://78.media.tumblr.com/201df481f5e8265e7029e52795a0855f/tumblr_p7if5wkhrp1tjqkbco1_540.png">
                 </a>
             </div>
         </div>
         <div class="col s12 m3">
-            <div id="post4" class="thumbnail hoverable">
+            <div id="post4" class="thumbnail hoverable" onclick="loadModalImg('#post4')">
                 <a class="modal-trigger" href="#modal_post">
                     <img src="https://78.media.tumblr.com/0ba238c9fa53bfd80a769439613e7a4a/tumblr_p75mz91kew1uhirv8o2_1280.jpg">
                 </a>
@@ -65,14 +65,14 @@
     </div>
     <div class="row">
         <div class="col s12 m3">
-            <div id="post5" class="thumbnail hoverable">
+            <div id="post5" class="thumbnail hoverable" onclick="loadModalImg('#post5')">
                 <a class="modal-trigger" href="#modal_post">
                     <img src="https://78.media.tumblr.com/f3bda235d2271e489de2aa9f6699c04c/tumblr_p7euxhmz6h1wcn0s5o1_1280.jpg">
                 </a>
             </div>
         </div>
         <div class="col s12 m3">
-            <div id="post6" class="thumbnail hoverable">
+            <div id="post6" class="thumbnail hoverable" onclick="loadModalImg('#post6')">
                 <a class="modal-trigger" href="#modal_post">
                     <img src="https://78.media.tumblr.com/9250279e58f4df2c97699b41eedbc30e/tumblr_p7e6uxkse51td5g4mo4_1280.jpg">
                 </a>
@@ -81,18 +81,26 @@
     </div>
 </div>
 
-<div id="modal_post" class="modal" style="max-height:75% !important;">
+<div id="modal_post" class="modal">
     <div class=" modal-content" style="height:inherit;">
         <div class="row" style="max-height:inherit;">
-            <div class="col s12 m7" style="max-height:inherit;">
-                <div class="valign-wrapper">
-                    <img class="modal-img" src="https://78.media.tumblr.com/0d4f34112b2a461c681594e2e45dde12/tumblr_p7g9szXG3m1wjf9lpo1_540.jpg">
+            <div class="col s12 m8" style="max-height:inherit;">
+                <div id="post_img" style="display:flex; align-items:center; justify-content: center;">
+                    <img class="materialboxed" style="max-height:500px;max-width:100%;" src="https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg">
                 </div>
             </div>
-            <div class="col s12 m5">
-                <span class="post-username"><a class="brown-text">user</a></span>
-                <span id="caption" class="post-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin ipsum sem, et dignissim risus rhoncus sed. Sed non quam at lacus fringilla suscipit in eu ante. Ut vel malesuada orci. Sed malesuada orci et sapien varius, ut interdum mauris tincidunt. Curabitur metus.</span>
-                <a id="readmore" class="waves-light btn-flat brown-text" onclick="readMore()">Read more</a>
+            <div class="col s12 m4" style="max-height:inherit;">
+                <div id="post_info">
+                    <div class="section">
+                        <span class="post-username"><a class="brown-text">user</a></span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="section">
+                        <span id="caption" class="post-caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sollicitudin ipsum sem, et dignissim risus rhoncus sed. Sed non quam at lacus fringilla suscipit in eu ante. Ut vel malesuada orci. Sed malesuada orci et sapien varius, ut interdum mauris tincidunt. Curabitur metus.</span>
+                        <br>
+                        <a id="readmore" class="brown-text" onclick="toggleReadMore()"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

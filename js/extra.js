@@ -9,11 +9,13 @@ function critixInit() {
         $('.sidenav').sidenav();
     });
 
-// toggle modal
-    var elem = document.querySelector('.modal');
-    var instance = M.Modal.init(elem, {opacity: 0.8, onOpenStart: loadCaption()});
+// toggle modal plugin
+    let elem = document.querySelector('.modal');
+    let modalpost = document.querySelector('#modal_post');
+    let inst_modalpost = M.Modal.init(modalpost, {opacity: 0.8, onOpenEnd: loadCaption()});
+    let inst_elem = M.Modal.init(elem, {opacity: 0.8});
 
-// toggle materialbox
+// toggle materialbox plugin
     $(document).ready(function(){
         $('.materialboxed').materialbox();
     });
@@ -41,24 +43,33 @@ function navLinks() {
     }
 }
 
+// grabs img src url from thumbnail and sets it as src for #post_img
+function loadModalImg(thumb_id) {
+    let img = $(thumb_id).children().children().attr('src');
+    print(img);
+    $('#post_img').children().children().attr('src',img);
+}
+
 // runs when loading modal_post
 // toggles truncated caption if caption > 140 characters
+// #caption SHOULD NOT initially contain .truncate class when modal is loaded for this to work
 function loadCaption() {
     let len = $('#caption').text().length;
     if(len>140) {
-        $('#caption').addClass('truncate');
+        toggleReadMore();
     }
 }
 
 // toggles readmore button and truncates/expands caption
-function readMore() {
+function toggleReadMore() {
     let trunc = $('#caption').hasClass('truncate');
     if(!trunc) { //caption is expanded
         //caption will be truncated
-        $('#readmore').text("Read more");
+        $('#readmore').html("<sub>Read more</sub>");
     } else { //caption is truncated
         // caption will be expanded
-        $('#readmore').text("Read less");
+        $('#readmore').html("<sub>Read less</sub>");
+
     }
     $('#caption').toggleClass('truncate');
 

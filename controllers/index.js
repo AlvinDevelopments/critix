@@ -110,38 +110,29 @@ router.get('/test',function(req,res){
 
 // Submit Login Credentials
 router.post('/login', function(req, res){
-    console.log(req);
-    var username = req.body.username;
-    var password = req.body.password;
-    console.log(username);
-    console.log(password);
+  console.log(req);
+  var username = req.body.username;
+  var password = req.body.password;
+  console.log(username);
+  console.log(password);
 
-    User.findOne({username: username, password: password}, function(err, user){
+  User.findOne({username: username, password: password}, function(err, user){
 
-        if(err){
-            console.log(err);
-            return res.status(500).send();
-        }
-        else if(user==null){
-            // return res.status(404).send();
-            return res.render('login');
-        }else{
-
-        req.session.user = user;
-        return res.render('index');
+      if(err){
+          console.log(err);
+          return res.status(500).send();
       }
-    });
+      else if(user==null){
+          // return res.status(404).send();
+          res.render('index', {login: false, errorMsg: "Incorrect Username/Password"});
+      }else{
+
+      req.session.user = user;
+      return res.render('index', {login: true, user: req.session.user.username});
+    }
+  });
 
 });
-
-router.get('/dashboard', function(req, res){
-    if(!req.session.user){
-        //return res.status(401).send();
-        return res.redirect('/login');
-    }
-
-    return res.status(200).send("Welcome");
-})
 
 router.get('/logout', function(req, res){
     req.session.destroy();
@@ -156,22 +147,28 @@ router.get('/register', function(req, res){
 
 // Submit registration request
 router.post('/register', function(req, res){
-    var username = req.body.username;
-    var password = req.body.password;
-    console.log(username);
-    console.log(password);
+  var username = req.body.username;
+  var password = req.body.password;
+  var firstname = req.body.firstname;
+  var lastname = req.body.lastname;
+  console.log(username);
+  console.log(password);
+  console.log(firstname);
+  console.log(lastname);
 
-    var newUser = new User();
-    newUser.username = username;
-    newUser.password = password;
+  var newUser = new User();
+  newUser.username = username;
+  newUser.password = password;
+  newUser.firstname = firstname;
+  newUser.lastname = lastname;
 
-    newUser.save(function(err, savedUser){
-        if(err){
-            console.log(err);
-            // return res.status(500).send();
-        }
-        return res.render('login');
-    })
+  newUser.save(function(err, savedUser){
+      if(err){
+          console.log(err);
+          // return res.status(500).send();
+      }
+      return res.render('index', {login: false});
+  })
 })
 
 
@@ -183,7 +180,7 @@ router.post('/register', function(req, res){
 // });
 
 // Renders the main page if user is logged in.
-router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index'));
+router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login: true, user: req.session.user.username}));
 
 
 // Render Upload page

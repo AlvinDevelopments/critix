@@ -1,260 +1,186 @@
+<!DOCTYPE html>
 <html>
-
-<<<<<<< HEAD
 <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/extra.css" media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <style>
+
+    </style>
 </head>
+
 <body>
-        <header>
-            <h2>Pure HTML5 file upload</h2>
-        </header>
-        <div class="container">
-            <div class="contr"><h2>You can select the file (image) and click Upload button</h2></div>
-
-            <div class="upload_form_cont">
-                <form id="upload_form" enctype="multipart/form-data" method="POST" action="/upload">
-                    <div>
-                        <div><label for="image_file">Please select image file</label></div>
-                        <div><input name="image_file" type="file"  d="image_file" /></div>
+        
+        <div id="loginModal" class="modal" style="width: 30%;">
+            <form action='/login' method='post'>
+                <div class="modal-content">
+                    <h1 style="text-align: center;">Login</h1>
+                    
+                    <div class="input-field col s12">
+                        <input id="username" name="username" type="text" required>
+                        <label for="username">Username</label>
                     </div>
-                    <div class="row">
-                         <div class="row">
-                           <div class="input-field col s12">
-                              <input name="title" type="text"  id="title" class="materialize-textarea">
-                             <label for="textarea1">Title</label>
-                          </div>
-                        </div>
- </div>
- <div class="row">
-     <div class="row">
-       <div class="input-field col s12">
-         <input type="text" name="author" id="author" class="materialize-textarea">
-         <label for="textarea2">Author</label>
-       </div>
-     </div>
- </div>
-                    <div>
-                        <button type="submit">Upload</button>
+
+                    <div class="input-field col s12">
+                        <input id="password" name="password" type="password" required>
+                        <label for="password">Password</label>
                     </div>
-                    <div id="fileinfo">
-                        <div id="filename"></div>
-                        <div id="filesize"></div>
-                        <div id="filetype"></div>
-                        <div id="filedim"></div>
+
+                    <div class="level is-marginless">
+                            <div class="level-item">
+                                    <p class="help"><%= typeof errorMsg !='undefined' ? errorMsg:''%> </p>
+                            </div>
                     </div>
-                    <!-- <div id="error">You should select valid image files only!</div>
-                    <div id="error2">An error occurred while uploading the file</div>
-                    <div id="abort">The upload has been canceled by the user or the browser dropped the connection</div>
-                    <div id="warnsize">Your file is very big. We can't accept it. Please select more small file</div> -->
-
-                    <div id="progress_info">
-                        <div id="progress"></div>
-                        <div id="progress_percent">&nbsp;</div>
-                        <div class="clear_both"></div>
-                        <div>
-                            <div id="speed">&nbsp;</div>
-                            <div id="remaining">&nbsp;</div>
-                            <div id="b_transfered">&nbsp;</div>
-                            <div class="clear_both"></div>
-                        </div>
-                        <div id="upload_response"></div>
+                
+                    <div class="row" style="text-align: center;">
+                        <button id ="login_submit" class="btn brown waves-effect waves-light" type="submit">Login
+                            <i class="material-icons right">send</i>
+                        </button>
                     </div>
-                </form>
 
-                <img id="preview" />
-            </div>
-        </div>
-=======
-    <head>
-        <script src="scriptTestsHere.js"></script>
-        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-        <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
-
-        /* Full-width input fields */
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        /* Set a style for all buttons */
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        /* Extra styles for the cancel button */
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
-        }
-
-        /* Center the image and position the close button */
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-            position: relative;
-        }
-
-        img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
-
-        .container {
-            padding: 16px;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
-
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-
-        /* The Close Button (x) */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: red;
-            cursor: pointer;
-        }
-
-        /* Add Zoom Animation */
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s
-        }
-
-        @-webkit-keyframes animatezoom {
-            from {-webkit-transform: scale(0)}
-            to {-webkit-transform: scale(1)}
-        }
-
-        @keyframes animatezoom {
-            from {transform: scale(0)}
-            to {transform: scale(1)}
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-        </style>
-    </head>
-
-    <body>
-
-        <!-- UPLOAD FILE HERE -->
-        <button onclick="document.getElementById('id01').style.display='block'" >Upload File</button>
-        <div id="id01" class="modal">
-
-            <form class="modal-content animate" id="customNames" >
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-
-            <!-- User Entry-->
-            <div class="container">
-
-                <!-- Custom Filename -->
-                <label for="filename"><b>Post Title</b></label>
-                <input type="text" placeholder="Enter Filename" name="filename" required>
-
-                <!-- Captions-->
-                <textarea rows="10%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
-
-                <!-- Choose File -->
-                <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
-
-                <!-- Close Modal-->
-                <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
-                    Upload File
-                </button>
-                <button type="button"  onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">
-                    Cancel
-                </button>
-                <div id="uploadResponse"></div>
-            </div>
+                </div>
             </form>
         </div>
 
-        <!-- Scripts for Modal Stuff -->
-        <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        function closeBox(){
-            document.getElementById('id01').style.display='none'
-            modal.style.display = "none";
-        }
-        </script>
+        <div id="signupModal" class="modal" style="width: 60%;">
+                <form action='/register' method='post'>
+                        <div class="row" style="margin: 5px;">
+                            <div class="input-field col s6">
+                                <input placeholder="e.g. iamcool69" id="signup_username" name="username" type="text" class="" required>
+                                <label for="signup_username">Username*</label>
+                                <span id="signup_username_help" class="helper-text" data-error="Cannot use this username" data-success="Username is available!"></span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 5px;">
+                            <div class="input-field col s6">
+                                <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="signup_pw" name="password" type="password" class="" required>
+                                <label for="signup_pw">Password*</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="confirm_pw" type="password" class="" onchange="" required>
+                                <label for="confirm_pw">Confirm Password*</label>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 5px;">
+                            <div class="input-field col s6">
+                                <input placeholder="First Name" id="signup_fname" name="firstname" type="text">
+                                <label for="signup_fname">Full Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="Last Name" id="signup_lname" name="lastname" type="text">
+                            </div>
+                        </div>
+                        <div class="row center-align">  
+                            <sub>* required fields</sub>
+                        </div>
+                        <div class="row center-align">
+                                <button id ="signup_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                    </form>
+            </div>
 
-        <!--
-        Just Responses after Upload
-        Not Needed in Final-->
-        <div id="uploadResponse"></div>
-        <div id="uploadResponse2"></div>
 
->>>>>>> 962be5d4d3d535481b8d93f7e2df1242bd6b582a
-    </body>
+    <% if(login){ %>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper brown">
+                <a href="index.html" class="brand-logo center">Critix</a>
+                <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="signup.html">Upload</a></li>
+                    <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
+                </ul>
+            </div>
+        </nav>
+        <ul class="sidenav" id="mobilesidenav">
+            <li><a href="signup.html">Upload</a></li>
+            <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
+        </ul>
+    </div>
+    <% } else{ %> 
+        <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper brown">
+                        <a href="index.html" class="brand-logo center">Critix</a>
+                        <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#signupModal">Sign up</a></li>
+                            <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#loginModal" >Login</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <ul class="sidenav" id="mobilesidenav">
+                    <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#signupModal">Sign in</a></li>
+                    <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#loginModal">Login</a></li>
+                </ul>
+        </div>
+        
+       
+    <% } %>
+    <ul class="sidenav" id="mobilesidenav">
+    </ul>
 
+    <div class="container">
+        <div class="section"></div>
+        <div class="section"></div>
+        <div class="row">
+            <div class="col s11 m3">
+                <div class="thumbnail hoverable">
+                    <img class="portrait" src="https://78.media.tumblr.com/0d4f34112b2a461c681594e2e45dde12/tumblr_p7g9szXG3m1wjf9lpo1_540.jpg">
+                </div>
+            </div>
+            <div class="col s11 m3">
+                <div class="thumbnail hoverable">
+                    <img class="portrait" src="https://78.media.tumblr.com/6352cd8ca6c68ebf241a25dce7608387/tumblr_p7hlusITG91slnd6ao1_540.jpg">
+                </div>
+            </div>
+            <div class="col s11 m3">
+                <div class="thumbnail hoverable">
+                    <div class="thumbnail-img-landscape">
+                        <img src="https://78.media.tumblr.com/201df481f5e8265e7029e52795a0855f/tumblr_p7if5wkhrp1tjqkbco1_540.png">
+                    </div>
+                </div>
+            </div>
+            <div class="col s11 m3">
+                <div class="thumbnail hoverable">
+                    <img src="https://78.media.tumblr.com/0ba238c9fa53bfd80a769439613e7a4a/tumblr_p75mz91kew1uhirv8o2_1280.jpg">
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col s11 m3">
+                    <div class="thumbnail hoverable">
+                        <img src="https://78.media.tumblr.com/f3bda235d2271e489de2aa9f6699c04c/tumblr_p7euxhmz6h1wcn0s5o1_1280.jpg">
+                    </div>
+                </div>
+                <div class="col s11 m3">
+                    <div class="thumbnail hoverable">
+                        <img src="https://78.media.tumblr.com/9250279e58f4df2c97699b41eedbc30e/tumblr_p7e6uxkse51td5g4mo4_1280.jpg">
+                    </div>
+                </div>
+            </div>
+            
 
+            
+    </div>
+    
+   
 
+    
+    
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/materialize.js"></script>
+    <script type="text/javascript" src="/scripts/extra.js"></script>
+</body>
 </html>

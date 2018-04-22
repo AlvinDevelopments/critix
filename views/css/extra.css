@@ -1,51 +1,57 @@
-.scrolling-wrapper {
-    padding:1em;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+.navbar-fixed{
+    position:absolute !important ;
+    bottom: 0px !important ;
 }
 
-.scroll-card {
-    display: inline-block;
+.modal-img {
+    max-height:600px;
+    max-width:100%;
+    width:auto;
+    object-fit: contain;
 }
 
-.is-horizontal-center {
-    justify-content: center;
+/*
+    code to create thumbnails:
+        https://jonathannicol.com/blog/2014/06/16/centre-crop-thumbnails-with-css/
+    code to create dynamically sized thumbnails:
+        https://css-tricks.com/aspect-ratio-boxes/
+        http://jsfiddle.net/webtiki/MpXYr/2/
+*/
+
+.thumbnail {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height:0;
+    padding-bottom:100%;
+    margin:1%;
 }
 
-.vcenter-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* assumes they're landscape photos by default */
+.thumbnail img {
+    position:absolute !important;
+    top:50% !important;
+    left:50% !important;
+    height:100% !important;
+    width:auto !important;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
 }
 
-
-.center{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-    /* width: 40%; */
-}
-.posts{
-  /* text-align: center; */
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
-  /* grid-row-gap: 10px; */
-  position: relative;
+.thumbnail img.portrait {
+    width:100% !important;
+    height:auto !important;
 }
 
-.containerz{
-  width: 20vw;
-  height: 20vw;
-  overflow: hidden;
-
+.post-username a {
+    font-weight: bold;
 }
 
-.post{
-  /* width: 100%; */
-  height: 100%;
-  object-fit: cover;
+.post-username a:before {
+    content: "@";
+}
 
+.post-username a:after {
+    content:": ";
 }

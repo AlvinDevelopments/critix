@@ -28,6 +28,7 @@ var ObjectId = require('mongodb').ObjectID;
 // const waveSurf = require('../lib/fileHandler.js');
 // const moment = require('moment');
 
+var loginStatus = false;
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
@@ -124,11 +125,14 @@ router.post('/login', function(req, res){
       }
       else if(user==null){
           // return res.status(404).send();
-          res.render('index', {login: false, errorMsg: "Incorrect Username/Password"});
+          //res.render('index', {login: false, errorMsg: "Incorrect Username/Password"});
+          loginStatus = false;
+          res.redirect('/')
       }else{
 
       req.session.user = user;
-      return res.render('index', {login: true, user: req.session.user.username});
+      loginStatus = true
+      return res.redirect('/');
     }
   });
 
@@ -136,7 +140,9 @@ router.post('/login', function(req, res){
 
 router.get('/logout', function(req, res){
     req.session.destroy();
-    return res.status(200).send();
+    loginStatus = false;
+    res.redirect('/');
+    //return res.status(200).send();
 })
 
 // Retrieve registration page
@@ -180,7 +186,7 @@ router.post('/register', function(req, res){
 // });
 
 // Renders the main page if user is logged in.
-router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login: true, user: req.session.user.username}));
+router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login: loginStatus, user: req.session.user.username}));
 
 
 // Render Upload page

@@ -1,3 +1,11 @@
+html, body,{
+  		height: 100%;
+}
+
+body {
+	padding-bottom: 70px;
+}
+
 .navbar-fixed{
     position:absolute !important ;
     bottom: 0px !important ;

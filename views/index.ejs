@@ -17,6 +17,7 @@
 
 <body>
         
+        <!-- LOGIN MODAL -->
         <div id="loginModal" class="modal" style="width: 30%;">
             <form action='/login' method='post'>
                 <div class="modal-content">
@@ -49,6 +50,7 @@
         </div>
 
 
+        <!-- SIGNUP MODAL -->
         <div id="signupModal" class="modal" style="width: 60%;">
                 <form action='/register' method='post'>
                         <div class="row" style="margin: 5px;">
@@ -88,6 +90,39 @@
                     </form>
             </div>
 
+        <!-- UPLOAD MODAL -->
+        <div id="uploadModal" class="modal">
+        
+            <form class="modal-content animate" id="customNames" >
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('uploadModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+            </div>
+        
+            <!-- User Entry-->
+            <div class="container">
+
+                <!-- Custom Filename -->
+                <label for="upload_title"><b>Post Title</b></label>
+                <input type="text" placeholder="Enter Filename" name="upload_title" required>
+                
+                <!-- Captions-->
+                <textarea rows="10%" cols="100%" name="upload_caption" form="customNames" required>Enter caption...</textarea>
+
+                <!-- Choose File -->
+                <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
+                
+                <!-- Close Modal-->
+                <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
+                    Upload File    
+                </button>
+                <button type="button"  onclick="document.getElementById('uploadModal').style.display='none'" class="cancelbtn">
+                    Cancel   
+                </button>
+                <div id="uploadResponse"></div>
+            </div>
+            </form>
+        </div>
+
 
     <% if(login){ %>
     <div class="navbar-fixed">
@@ -99,7 +134,9 @@
                 <a href="index.html" class="brand-logo center">Critix</a>
                 <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="signup.html">Upload</a></li>
+                    
+                    <!-- <li><a href="signup.html">Upload</a></li> -->
+                    <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
                     <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
                 </ul>
             </div>

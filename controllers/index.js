@@ -45,6 +45,10 @@ router.get('/signup', function(req,res){
   res.render('signup');
 })
 
+// Retrieve Upload  Page
+router.get('/upload', function(req,res){
+  res.render('upload');
+})
 
 // Retrieve Comments for post_id
 router.get('/loadComments',function(req,res){

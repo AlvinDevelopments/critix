@@ -92,24 +92,25 @@
 
         <!-- UPLOAD MODAL -->
         <div id="uploadModal" class="modal">
-        
-            <form class="modal-content animate" id="customNames" >
+            <h1 style="text-align: center;">Upload Image</h1>
+            <form action='/upload' method='post' class="modal-content animate" id="customNames" >
             <div class="imgcontainer">
                 <span onclick="document.getElementById('uploadModal').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
         
+            
             <!-- User Entry-->
             <div class="container">
 
                 <!-- Custom Filename -->
-                <label for="upload_title"><b>Post Title</b></label>
+                <label for="tite"><b>Post Title</b></label>
                 <input type="text" placeholder="Enter Filename" name="upload_title" required>
                 
                 <!-- Captions-->
-                <textarea rows="10%" cols="100%" name="upload_caption" form="customNames" required>Enter caption...</textarea>
+                <textarea rows="10%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
 
                 <!-- Choose File -->
-                <input type="file" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
+                <input type="file" name = "filepath" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
                 
                 <!-- Close Modal-->
                 <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
@@ -120,6 +121,13 @@
                 </button>
                 <div id="uploadResponse"></div>
             </div>
+
+            <div class="row center-align">
+                    <button id ="signup_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+
             </form>
         </div>
 
@@ -142,7 +150,7 @@
             </div>
         </nav>
         <ul class="sidenav" id="mobilesidenav">
-            <li><a href="signup.html">Upload</a></li>
+            <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
             <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
         </ul>
     </div>
@@ -217,6 +225,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/scripts/materialize.js"></script>
     <script type="text/javascript" src="/scripts/extra.js"></script>
+    <script type="text/javascript" src="/scripts/uploadFunctions.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

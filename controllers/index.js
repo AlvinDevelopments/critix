@@ -181,6 +181,30 @@ router.post('/register', function(req, res){
   })
 })
 
+// UPLOAD SAVE STUFF 
+/*
+router.post('/upload', function(req,res){
+  //var post_id = "";
+  
+  var queryAuthor = Users.find();
+  var author = queryAuthor.find({'username':req.query.username});
+  
+  var title = req.body.title;
+  var filepath = "/" + author + "/" + title;
+  var caption = req.body.caption;
+
+console.log(req.query.username);
+
+  // Store 
+  var newPost = new Post();
+  newPost.author = username;
+  newPost.title = title;
+  newPost.caption = caption;
+  newPost.
+
+})
+*/
+
 
 // Alvin's stuff below--------
 

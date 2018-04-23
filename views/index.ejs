@@ -110,9 +110,10 @@
                 <textarea rows="10%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
 
                 <!-- Choose File -->
-                <input type="file" name = "filepath" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
+                <input class = "file-input" type="file" name = "filepath" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
                 
                 <!-- Close Modal-->
+                <!-- Comment
                 <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
                     Upload File    
                 </button>
@@ -120,16 +121,23 @@
                     Cancel   
                 </button>
                 <div id="uploadResponse"></div>
+
+                -->
+
+                <div class="row center-align">
+                        <button id ="upload_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
+
             </div>
 
-            <div class="row center-align">
-                    <button id ="signup_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
-                        <i class="material-icons right">send</i>
-                    </button>
-                </div>
+
 
             </form>
         </div>
+
 
 
     <% if(login){ %>

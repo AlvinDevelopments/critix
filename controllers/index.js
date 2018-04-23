@@ -220,6 +220,7 @@ router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login
 // Render Upload page
 router.get('/upload',function(req,res){
   res.render('upload');
+  console.log('upload get');
 });
 
 // Upload a file to server and registers it as a post in DB

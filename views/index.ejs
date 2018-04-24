@@ -21,13 +21,13 @@
 </head>
 
 <body>
-        
+
         <!-- LOGIN MODAL -->
         <div id="loginModal" class="modal" style="width: 30%;">
             <form action='/login' method='post'>
                 <div class="modal-content">
                     <h1 style="text-align: center;">Login</h1>
-                    
+
                     <div class="input-field col s12">
                         <input id="username" name="username" type="text" required>
                         <label for="username">Username</label>
@@ -43,7 +43,7 @@
                                     <p class="help" id="errorMsg" style="color: red;"><%= typeof errorMsg !='undefined' ? errorMsg:''%> </p>
                             </div>
                     </div>
-                
+
                     <div class="row" style="text-align: center;">
                         <button id ="login_submit" class="btn brown waves-effect waves-light" type="submit">Login
                             <i class="material-icons right">send</i>
@@ -84,7 +84,7 @@
                                 <input placeholder="Last Name" id="signup_lname" name="lastname" type="text">
                             </div>
                         </div>
-                        <div class="row center-align">  
+                        <div class="row center-align">
                             <sub>* required fields</sub>
                         </div>
                         <div class="row center-align">
@@ -102,15 +102,15 @@
             <div class="imgcontainer">
                 <span onclick="document.getElementById('uploadModal').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
-        
-            
+
+
             <!-- User Entry-->
             <div class="container">
 
                 <!-- Custom Filename -->
                 <label for="tite"><b>Post Title</b></label>
                 <input type="text" placeholder="Enter Filename" name="upload_title" required>
-                
+
                 <!-- Captions-->
                 <label for="tite"><b>Caption</b></label>
                 <textarea rows="10%" cols="100%" placeholder="Enter caption..." name="caption" form="customNames" required></textarea>
@@ -118,14 +118,14 @@
                 <!-- Choose File -->
                 <input class = "file-input" type="file" name = "filepath" id="imageFileUpload" multiple size="50"  onchange="filePreview()" required>
                 <img src="" height="200" alt="Image preview...">
-                
+
                 <!-- Close Modal-->
                 <!-- Comment
                 <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
-                    Upload File    
+                    Upload File
                 </button>
                 <button type="button"  onclick="document.getElementById('uploadModal').style.display='none'" class="cancelbtn">
-                    Cancel   
+                    Cancel
                 </button>
                 <div id="uploadResponse"></div>
 
@@ -154,10 +154,10 @@
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li><a a class="btn brown waves-effect waves-light btn" href="/logout">Logout</a></li>
                 </ul>
-                <a href="index.html" class="brand-logo center">Critix</a>
+                <a href="#" class="brand-logo center">Critix</a>
                 <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    
+
                     <!-- <li><a href="signup.html">Upload</a></li> -->
                     <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
                     <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
@@ -169,7 +169,7 @@
             <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
         </ul>
     </div>
-    <% } else{ %> 
+    <% } else{ %>
         <div class="navbar-fixed">
                 <nav>
                     <div class="nav-wrapper brown">
@@ -186,8 +186,8 @@
                     <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#loginModal">Login</a></li>
                 </ul>
         </div>
-        
-       
+
+
     <% } %>
     <ul class="sidenav" id="mobilesidenav">
     </ul>
@@ -231,9 +231,9 @@
                     </div>
                 </div>
             </div>
-            
 
-            
+
+
     </div>
 
     <script type="text/javascript">
@@ -241,9 +241,9 @@
             console.log("Error msg length " + document.getElementById("errorMsg").innerHTML);
             if(document.getElementById("errorMsg").innerHTML.trim() != ""){
                 $('#loginModal').modal("open");
-            }       
+            }
         });
-        
+
    </script>
 
 

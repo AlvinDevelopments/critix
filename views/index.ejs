@@ -108,7 +108,8 @@
                 <input type="text" placeholder="Enter Filename" name="upload_title" required>
                 
                 <!-- Captions-->
-                <textarea rows="10%" cols="100%" name="caption" form="customNames" required>Enter caption...</textarea>
+                <label for="tite"><b>Caption</b></label>
+                <textarea rows="10%" cols="100%" placeholder="Enter caption..." name="caption" form="customNames" required></textarea>
 
                 <!-- Choose File -->
                 <input class = "file-input" type="file" name = "filepath" id="imageFileUpload" multiple size="50"  onchange="uploadFile()" required>
@@ -127,7 +128,7 @@
                 -->
 
                 <div class="row center-align">
-                        <button id ="upload_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
+                        <button id ="upload_submit" class="btn brown waves-effect waves-light" type="submit">Upload
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

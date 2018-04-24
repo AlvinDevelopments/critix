@@ -135,7 +135,7 @@ router.post('/login', function(req, res){
       }else{
 
       req.session.user = user;
-      req.session.loginStatus = true
+      req.session.loginStatus = true;
       return res.redirect('/');
     }
   });
@@ -230,36 +230,39 @@ router.post('/upload',(req,res)=>{
   // create post via post Schema
   functions.upload(req,res,(err)=>{
     // console.log(req.file.filename);
-    console.log(req.body.title);
+    console.log(req.body.filepath);
     // console.log('-----------------------------');
     // console.log(req);
     if(err){
       console.log("failed")
       res.render('index',{
+        login: req.session.loginStatus,
         msg: err
       });
     }
     else
     {
-      if(req.file==undefined){
+      if(req.body.filepath==undefined){
         console.log("Error: No File Selected!'");
         res.render('index',{
+          login: req.session.loginStatus,
           msg: 'Error: No File Selected!'
         });
       }
       else{
         res.render('index',{
+          login: req.session.loginStatus,
           msg: 'File Uploaded!',
           // file: `${req.file.filename}`
         });
 
         let post = new Post();
-        let title = req.title;
+        let title = req.body.upload_title;
 
-          post.filepath = req.file.filename;
-          post.post_id = req.file.filename;
+          post.filepath = req.body.filepath;
+          post.post_id = req.body.filepath;
           post.author = req.body.author;
-          post.title = req.body.title;
+          post.title = req.body.upload_title;
           post.date = Date.now();
 
           post.save(function(err){

@@ -100,8 +100,9 @@ io.on('connection', function(socket){
 
   // Listen on chat
   socket.on('chat', function(msg){
-    socket.emit('chat', "Put this #comments div into a comments box")
+    socket.emit('chat', "Put this #comments div into a comments box");
     socket.emit('chat', msg);
+    
     // Just emit message
     let timestamp = new Date().toLocaleTimeString();
     let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();

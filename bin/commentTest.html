@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="usernamediv">
+      <!-- USERNAME -->
+      <ul id="myusername"></ul>
+    </div>
+
+    <div id="chatdiv">
+      <!-- MESSAGES -->
+      <h1>Chat</h1>
+      <ul id="messages"></ul>
+    </div>
+
+
+    <div id="userlistdiv">
+      <!-- USERS ONLINE -->
+      <h1>User List</h1>
+      <ul id="userlist"></ul>
+    </div>
+
+    <div id="submit">
+      <form action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
+  
+    <script
+       src="https://code.jquery.com/jquery-3.1.1.min.js"
+       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+       crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+    <script src="/bin/www"></script>
+  </body>
+</html>
+
+<script>
+
+$(function chatHandler() {
+    var socket = io();
+    $('form').submit(function chatHandler(){
+        socket.emit('chat', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat', function chatHandler(msg){
+        $('#messages').append($('<li>').html(msg));
+        scroll();
+    });
+    socket.on('userchat', function chatHandler(msg){
+        $('#messages').append($('<li>').html(msg)); 
+        scroll();
+    });
+
+    socket.on('myusername', function chatHandler(msg){
+        $('#myusername').html("Your Username: " + msg);
+    });
+
+    socket.on('userlist', function chatHandler(msg){
+        $('#userlist').html("");
+        let list = [];
+        list = msg;
+        
+        for (let i = 0; i < list.length; i++){
+            $('#userlist').append($('<li>').html(list[i].fontcolor("white")));
+        } 
+    });
+});
+</script>

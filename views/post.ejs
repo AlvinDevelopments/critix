@@ -31,8 +31,10 @@
     <br>
 
     <div style=" max-width: 100%; margin: 0 auto; width:70%;">
-      <!-- <h2><%= file._id %></h2>
-      <h4>Uploaded on <%= file.date.toISOString().slice(0,10).replace(/-/g,"/"); %> </h4> -->
+      <h2><%= file.title %></h2>
+      <h5>by <%= file.author %></h5>
+      <p>Uploaded on <%= file.date.toISOString().slice(0,10).replace(/-/g,"/"); %> </p>
+      <div class="caption"><%= file.caption%></div>
     </div>
   </div>
 

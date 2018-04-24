@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/scripts/materialize.js"></script>
     <script type="text/javascript" src="/scripts/extra.js"></script>
     <script type="text/javascript" src="/scripts/main.js"></script>
-    <script type="text/javascript" src="/scripts/uploadFunctions.js"></script>
+    <!-- <script type="text/javascript" src="/scripts/uploadFunctions.js"></script> -->
     <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
     <script type="text/javascript" src="/scripts/comments.js"></script>
 
@@ -103,13 +103,13 @@
         <!-- UPLOAD MODAL -->
         <div id="uploadModal" class="modal" style="width: 40%;">
 
-            <form action='/upload' method='post' class="modal-content animate" id="customNames" >
+            <form action='/upload' method='post' enctype="multipart/form-data" class="modal-content animate" id="customNames" >
                 <h1 style="text-align: center;">Upload</h1>
                 <!-- User Entry-->
                 <div class="container">
                     <!-- Choose File -->
                     <div>
-                    <input class = "file-input" type="file" name = "filepath" id="imageFileUpload" multiple size="50" onchange="filePreview()" required>
+                    <input class = "file-input" type="file" name = "image_file" id="imageFileUpload" multiple size="50" onchange="filePreview()" required>
                     <label for="imageFileUpload" class="custom-file-upload">
                             Choose An Image...
                         </label>

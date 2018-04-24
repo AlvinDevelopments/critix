@@ -262,11 +262,11 @@ router.post('/upload',(req,res)=>{
       else{
         let post = new Post();
         let title = req.body.upload_title;
-
         post.filepath = req.file.filename;
         post.post_id = req.file.filename;
-        post.author = req.body.username;
+        post.author = req.session.user.username;
         post.title = req.body.upload_title;
+        post.caption = req.body.caption;
         post.date = Date.now();
 
         post.save(function(err){
@@ -294,7 +294,7 @@ router.get('/post/:_id',(req,res)=>{
   // console.log('generating post');
 
   let query = Post.findOne({'_id':ObjectID(req.params._id)});
-  query.select('_id filepath title date');
+  query.select('_id filepath title date caption author');
 
   query.exec(function(err,post){
     if(err){

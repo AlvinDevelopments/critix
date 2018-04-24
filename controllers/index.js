@@ -239,13 +239,23 @@ console.log(req.query.username);
       else{
         // console.log(posts);
 
-        res.render('index',{
-          posts: posts,
-          filetype: 'jpg',
-          login: req.session.loginStatus,
-          // user: req.session.user.username
-          user:"user"
-        });
+        if(req.session.user!=undefined){
+          res.render('index',{
+            posts: posts,
+            filetype: 'jpg',
+            login: req.session.loginStatus,
+            // user: req.session.user.username
+            user: req.session.user.username
+          });
+        } else{
+          res.render('index',{
+            posts: posts,
+            filetype: 'jpg',
+            login: req.session.loginStatus,
+            // user: req.session.user.username
+
+          });
+        }
       }
     });
   }

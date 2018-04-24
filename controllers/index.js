@@ -51,14 +51,17 @@ router.get('/upload', function(req,res){
 })
 
 // Retrieve Comments for post_id
-router.get('/loadComments',function(req,res){
+router.post('/loadComments', functions.checkIfLoggedIn(), function(req,res){
 
   let format = req.query.format;
   type = req.query.type;
 
   let queryComments = Comment.find();
-  queryComments.find({'post_id':req.query.post_id});
-  console.log(req.query.post_id);
+  // queryComments.find({'post_id':req.query.post_id});
+  queryComments.find({'post_id':req.body.post_id});
+  queryComments.select('author comment time');
+  // console.log(req.query.post_id);
+  console.log(req.body.post_id);
 
   queryComments.exec(function(err,comments){
     if(err){
@@ -74,20 +77,20 @@ router.get('/loadComments',function(req,res){
 
 });
 
-// router.post('/postComment?comment=:comment&post_id=:id',function(req,res){
-router.post('/postComment',function(req,res){
+// router.post('/postComment?comment=:comment&post_id=:id', functions.checkIfLoggedIn(), function(req,res){
+router.post('/postComment', functions.checkIfLoggedIn(), function(req,res){
+  let backURL=req.header('Referer').split('localhost/')[1] || '/';
   console.log('posting a comment');
 
   let comment = new Comment();
 
   comment.comment = req.body.comment;
-  // console.log(req);
-comment.post_id = req.body.post_id;
-  // comment.author = req.session.user.username;
+  console.log(req);
+
+  comment.post_id = req.body.post_id;
+  comment.author = req.session.user.username;
 
   comment.time = Date.now();
-
-
 
 
     comment.save(function(err){
@@ -98,60 +101,15 @@ comment.post_id = req.body.post_id;
       }
       else{
         console.log("sent to db");
+          console.log("returning to post "+backURL);
+        // res.render(backURL);
         // console.log(post);
         // res.send(comment);
-        // return res.status(200).send();
+        return res.status(200).send();
       }
     });
 
 
-});
-
-
-router.get('/test',function(req,res){
-  console.log('console log of the test.');
-  res.send('hi, this is a test!');
-});
-
-// Submit Login Credentials
-router.post('/login', function(req, res){
-  console.log(req);
-  var username = req.body.username;
-  var password = req.body.password;
-  console.log(username);
-  console.log(password);
-
-  User.findOne({username: username, password: password}, function(err, user){
-
-      if(err){
-          console.log(err);
-          return res.status(500).send();
-      }
-      else if(user==null){
-          // return res.status(404).send();
-          //res.render('index', {login: false, errorMsg: "Incorrect Username/Password"});
-          req.session.loginStatus = false;
-          res.redirect('/')
-      }else{
-
-      req.session.user = user;
-      req.session.loginStatus = true;
-      return res.redirect('/');
-    }
-  });
-
-});
-
-router.get('/logout', function(req, res){
-    req.session.destroy();
-
-    res.redirect('/');
-    //return res.status(200).send();
-})
-
-// Retrieve registration page
-router.get('/register', function(req, res){
-  res.render('signup');
 });
 
 

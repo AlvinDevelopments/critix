@@ -47,7 +47,7 @@ confirm_password.onkeyup = validatePassword;
 
 // Upload File
 function filePreview(){
-    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID 
+    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID
 
     // Limit File Size
     let fileType = imageFile.files[0].type;
@@ -60,18 +60,14 @@ function filePreview(){
         var preview = document.querySelector('img');
         var filez   = document.querySelector('input[type=file]').files[0];
         var reader  = new FileReader();
-    
+
         reader.addEventListener("load", function () {
         preview.src = reader.result;
         }, false);
-    
+
         if (filez) {
         fileContent = reader.readAsDataURL(filez);
         preview.src = reader.result;
         }
     }
-}   
-
-
-
-  
+}

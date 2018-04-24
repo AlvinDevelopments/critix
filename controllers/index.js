@@ -144,7 +144,7 @@ router.post('/login', function(req, res){
 
 router.get('/logout', function(req, res){
     req.session.destroy();
-    
+
     res.redirect('/');
     //return res.status(200).send();
 })
@@ -181,21 +181,21 @@ router.post('/register', function(req, res){
   })
 })
 
-// UPLOAD SAVE STUFF 
+// UPLOAD SAVE STUFF
 /*
 router.post('/upload', function(req,res){
   //var post_id = "";
-  
+
   var queryAuthor = Users.find();
   var author = queryAuthor.find({'username':req.query.username});
-  
+
   var title = req.body.title;
   var filepath = "/" + author + "/" + title;
   var caption = req.body.caption;
 
 console.log(req.query.username);
 
-  // Store 
+  // Store
   var newPost = new Post();
   newPost.author = username;
   newPost.title = title;
@@ -214,7 +214,37 @@ console.log(req.query.username);
 // });
 
 // Renders the main page if user is logged in.
-router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login: req.session.loginStatus, user: req.session.user.username}));
+// router.get('/',functions.checkIfLoggedIn(),function(req,res){
+  router.get('/',function(req,res){
+
+    let query = Post.find();
+    query.select('_id post_id');
+
+    query.exec(function(err,posts){
+      if(err){
+        res.render('index',{
+          msg: err
+        });
+      }
+      else{
+        // console.log(posts);
+
+        res.render('index',{
+          posts: posts,
+          filetype: 'jpg',
+          login: req.session.loginStatus,
+          // user: req.session.user.username
+          user:"user"
+        });
+      }
+    });
+  }
+
+
+
+
+
+);
 
 
 // Render Upload page
@@ -229,14 +259,14 @@ router.post('/upload',(req,res)=>{
 	console.log("upload request");
   // create post via post Schema
   functions.upload(req,res,(err)=>{
-    console.log(req.body.filepath);
+    console.log(req);
     if(err){
       console.log("failed")
       return res.redirect('/');
     }
     else
     {
-      if(req.body.filepath==undefined){
+      if(req.file.path==undefined){
         console.log("Error: No File Selected!'");
         return res.redirect('/');
       }
@@ -244,9 +274,9 @@ router.post('/upload',(req,res)=>{
         let post = new Post();
         let title = req.body.upload_title;
 
-        post.filepath = req.body.filepath;
-        post.post_id = req.body.filepath;
-        post.author = req.body.author;
+        post.filepath = req.file.filename;
+        post.post_id = req.file.filename;
+        post.author = req.body.username;
         post.title = req.body.upload_title;
         post.date = Date.now();
 
@@ -264,7 +294,7 @@ router.post('/upload',(req,res)=>{
           }
         })
       }
-    
+
     }
   })
 });
@@ -354,7 +384,12 @@ router.get('/discover',function(req,res){
     else{
       // console.log(posts);
 
-      res.render('discover',{
+      // res.render('discover',{
+      //   posts: posts,
+      //   filetype: 'jpg'
+      // });
+
+      return res.send({
         posts: posts,
         filetype: 'jpg'
       });

@@ -179,13 +179,13 @@
 
                     <!-- <li><a href="signup.html">Upload</a></li> -->
                     <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
-                    <li><a class="btn brown waves-effect waves-light btn" href="/"><%= typeof user !='undefined' ? user:''%></a></li>
+                    <li><a class="btn brown waves-effect waves-light btn" href="/"><%= typeof user !='undefined' ? user:'FUCKS'%></a></li>
                 </ul>
             </div>
         </nav>
         <ul class="sidenav" id="mobilesidenav">
             <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
-            <li><a class="btn brown waves-effect waves-light btn" href="/"><%= typeof user !='undefined' ? user:''%></a></li>
+            <li><a class="btn brown waves-effect waves-light btn" href="/"><%= typeof user =='undefined' ? login.user:'FUCK'%></a></li>
         </ul>
     </div>
     <% } else{ %>
@@ -211,7 +211,10 @@
     <ul class="sidenav" id="mobilesidenav">
     </ul>
 
-    <div class="row valign-wrapper">
+
+    <div class="container" id="containerz"></div>
+
+    <!-- <div class="row valign-wrapper">
 
             <div class="col m1 hide-on-small-only">
                 <ul class="pagination">
@@ -273,7 +276,7 @@
                     <li class="waves-effect" id="pagination_back"><a href="#!"><i class="large material-icons">chevron_right</i></a></li>
                 </ul>
                 </div>
-        </div>
+        </div> -->
 
     <script type="text/javascript">
         $(document).ready(function () {

@@ -123,11 +123,11 @@ router.get('/test',function(req,res){
 
 // Submit Login Credentials
 router.post('/login', function(req, res){
-  console.log(req);
+  // console.log(req);
   var username = req.body.username;
   var password = req.body.password;
-  console.log(username);
-  console.log(password);
+  // console.log(username);
+  // console.log(password);
 
   // Search through the database
   User.findOne({username: username, password: password}, function(err, user){
@@ -188,36 +188,8 @@ router.post('/register', function(req, res){
           console.log(err);
       }
       return res.render('index', {login: req.session.loginStatus});
-  })
-})
-
-<<<<<<< HEAD
-// UPLOAD SAVE STUFF
-/*
-router.post('/upload', function(req,res){
-  //var post_id = "";
-
-  var queryAuthor = Users.find();
-  var author = queryAuthor.find({'username':req.query.username});
-
-  var title = req.body.title;
-  var filepath = "/" + author + "/" + title;
-  var caption = req.body.caption;
-
-console.log(req.query.username);
-
-  // Store
-  var newPost = new Post();
-  newPost.author = username;
-  newPost.title = title;
-  newPost.caption = caption;
-  newPost.
-
-})
-*/
-
-=======
->>>>>>> master
+  });
+});
 
 // Alvin's stuff below--------
 
@@ -229,6 +201,11 @@ console.log(req.query.username);
 // Renders the main page if user is logged in.
 // router.get('/',functions.checkIfLoggedIn(),function(req,res){
   router.get('/',function(req,res){
+    let username = 'guest';
+    if(req.session.loginStatus){
+      username = req.session.user.username;
+      console.log(req.session.user.username);
+    }
 
     let query = Post.find();
     query.select('_id post_id');
@@ -246,8 +223,7 @@ console.log(req.query.username);
           posts: posts,
           filetype: 'jpg',
           login: req.session.loginStatus,
-          // user: req.session.user.username
-          user:"user"
+          user: username
         });
       }
     });

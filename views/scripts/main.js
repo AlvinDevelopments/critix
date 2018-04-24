@@ -41,6 +41,8 @@ function loadPosts(){
       let count = 0;
       let numCols = 4;
 
+      // html+='<div class="valign-wrapper">';
+      // html+='<div class=" halign-wrapper">';
       html+='<div class="section"></div>';
       html+='<div class="section"></div>';
       html+='<div class="row">';
@@ -54,7 +56,7 @@ function loadPosts(){
             count = 0;
           }
 
-          html+='<div class="col s11 m3">';
+          html+='<div class="col s12 m6 l3">';
           html+='<div class="thumbnail hoverable">';
           html+='<a href="/post/';
           html+=typeof post._id.toString() !='undefined' ? post._id.toString():'';
@@ -69,6 +71,7 @@ function loadPosts(){
 
       });
 
+      // html+='</div>';
       $('#containerz.container').html(html);
 
 

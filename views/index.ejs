@@ -10,7 +10,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/scripts/materialize.js"></script>
     <script type="text/javascript" src="/scripts/extra.js"></script>
-    <script type="text/javascript" src="/scripts/uploadFunctions.js"></script>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -58,6 +57,7 @@
         <!-- SIGNUP MODAL -->
         <div id="signupModal" class="modal" style="width: 60%;">
                 <form action='/register' method='post'>
+                    <h1 style="text-align: center;">Signup Form</h1>
                         <div class="row" style="margin: 5px;">
                             <div class="input-field col s6">
                                 <input placeholder="e.g. iamcool69" id="signup_username" name="username" type="text" class="" required>
@@ -96,56 +96,37 @@
             </div>
 
         <!-- UPLOAD MODAL -->
-        <div id="uploadModal" class="modal">
-            <h1 style="text-align: center;">Upload Image</h1>
-            <form action='/upload' method='post' class="modal-content animate" id="customNames" >
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('uploadModal').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
-        
+        <div id="uploadModal" class="modal" style="width: 40%;">
             
-            <!-- User Entry-->
-            <div class="container">
-
-                <!-- Custom Filename -->
-                <label for="tite"><b>Post Title</b></label>
-                <input type="text" placeholder="Enter Filename" name="upload_title" required>
-                
-                <!-- Captions-->
-                <label for="tite"><b>Caption</b></label>
-                <textarea rows="10%" cols="100%" placeholder="Enter caption..." name="caption" form="customNames" required></textarea>
-
-                <!-- Choose File -->
-                <input class = "file-input" type="file" name = "filepath" id="imageFileUpload" multiple size="50"  onchange="filePreview()" required>
-                <img src="" height="200" alt="Image preview...">
-                
-                <!-- Close Modal-->
-                <!-- Comment
-                <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
-                    Upload File    
-                </button>
-                <button type="button"  onclick="document.getElementById('uploadModal').style.display='none'" class="cancelbtn">
-                    Cancel   
-                </button>
-                <div id="uploadResponse"></div>
-
-                -->
-
-                <div class="row center-align">
-                        <button id ="upload_submit" class="btn brown waves-effect waves-light" type="submit">Upload
-                            <i class="material-icons right">send</i>
-                        </button>
+            <form action='/upload' method='post' class="modal-content animate" id="customNames" >
+                <h1 style="text-align: center;">Upload</h1>
+                <!-- User Entry-->
+                <div class="container">
+                    <!-- Choose File -->
+                    <div>   
+                    <input class = "file-input" type="file" name = "filepath" id="imageFileUpload" multiple size="50" onchange="filePreview()" required>
+                    <label for="imageFileUpload" class="custom-file-upload">
+                            Choose An Image...
+                        </label>
+                    <br>
+                    <img src="" height="300" alt="Image preview..." style="display: none; vertical-align: middle;">
                     </div>
-
-
-            </div>
-
-
-
+                    <br>
+                    <!-- Custom Filename -->
+                    <label for="tite"><b>Post Title</b></label>
+                    <input type="text" placeholder="Enter Title" name="upload_title" required>
+                    <!-- Captions-->
+                    <label for="tite"><b>Caption</b></label>
+                    <textarea rows="10%" cols="100%" placeholder="Enter Caption..." name="caption" form="customNames" required></textarea>
+                    
+                    <div class="row center-align">
+                            <button id ="upload_submit" class="btn brown waves-effect waves-light" type="submit">Upload
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                </div>
             </form>
         </div>
-
-
 
     <% if(login){ %>
     <div class="navbar-fixed">

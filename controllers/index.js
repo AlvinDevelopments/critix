@@ -229,63 +229,44 @@ router.post('/upload',(req,res)=>{
 	console.log("upload request");
   // create post via post Schema
   functions.upload(req,res,(err)=>{
-    // console.log(req.file.filename);
     console.log(req.body.filepath);
-    // console.log('-----------------------------');
-    // console.log(req);
     if(err){
       console.log("failed")
-      res.render('index',{
-        login: req.session.loginStatus,
-        msg: err
-      });
+      return res.redirect('/');
     }
     else
     {
       if(req.body.filepath==undefined){
         console.log("Error: No File Selected!'");
-        res.render('index',{
-          login: req.session.loginStatus,
-          msg: 'Error: No File Selected!'
-        });
+        return res.redirect('/');
       }
       else{
-        res.render('index',{
-          login: req.session.loginStatus,
-          msg: 'File Uploaded!',
-          // file: `${req.file.filename}`
-        });
-
         let post = new Post();
         let title = req.body.upload_title;
 
-          post.filepath = req.body.filepath;
-          post.post_id = req.body.filepath;
-          post.author = req.body.author;
-          post.title = req.body.upload_title;
-          post.date = Date.now();
+        post.filepath = req.body.filepath;
+        post.post_id = req.body.filepath;
+        post.author = req.body.author;
+        post.title = req.body.upload_title;
+        post.date = Date.now();
 
-          post.save(function(err){
-            if(err){
-              console.log("FAILED");
-              console.log(err);
-              return res.status(500).send();
-            }
-            else{
-              console.log("sent to db");
-              console.log(post);
-              return res.status(200).send();
-            }
-          });
+        post.save(function(err){
+          if(err){
+            console.log("FAILED");
+            console.log(err);
+            return res.redirect('/');
+          }
+          else{
+            console.log("sent to db");
+            console.log(post);
+            return res.redirect('/');
 
+          }
+        })
       }
+    
     }
-  }
-);
-
-
-
-
+  })
 });
 
 

@@ -10,6 +10,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/scripts/materialize.js"></script>
     <script type="text/javascript" src="/scripts/extra.js"></script>
+    <script src="/scripts/comments.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
 
 
     <!--Let browser know website is optimized for mobile-->
@@ -18,7 +20,7 @@
     <style>
 
     </style>
-</head>
+</head> 
 
 <body>
         
@@ -159,6 +161,38 @@
                     <button class="btn-flat modal-action modal-close brown-text" title="Close"><em class="material-icons">close</em></button>
                 </div>
             </div>
+
+    <!-- TEST CHATBOX-->
+    <div id="comments">Comments Here</div>
+    <div id="yourUsername">Your Username: 
+            <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
+    </div>
+    <div id="commentsReceive"></div>
+    <div id="comment_submit">
+        <!--<form id="commentForm" action='/upload' method='post'></form> Temp comment for later -->
+        <form id="commentForm" action="">
+
+            <!-- Get Post ID Here-->
+
+
+            <!-- This is the username -->
+            <a href="/login" id="author"><%= typeof user !='undefined' ? user:''%></a>
+
+            
+            <!-- Send this as comment to DB -->
+            <input id="postComment" autocomplete="off" />
+
+            <!-- Send all to DB 
+                comment_id: String,
+                comment: String,
+                author: String,
+                post_id: String,
+                time: Date
+            -->
+
+            <button  onclick="commentDB()" >Send</button>
+        </form>
+    </div>
 
 
 

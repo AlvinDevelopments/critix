@@ -1,20 +1,30 @@
 $(function chatHandler() {
     var socket = io();
-    $('form').submit(function chatHandler(){
-        socket.emit('chat', $('#m').val());
-        $('#m').val('');
+
+    // This is the form for the comments
+    $('#commentForm').submit(function chatHandler(){
+        socket.emit('chat', $('#postComment').val());
+        $('#postComment').val('');
         return false;
     });
 
-    // For Comments
-    socket.on('chat', function chatHandler(msg){
-        $('#comments').append($('<li>').html(msg));
-        scroll();
-    });
+     // For Comments
+     // Displays all comments
+     socket.on('chat', function chatHandler(msg){
+         $('#comments').append($('<li>').html(msg));
+         scroll();
+     });
 
-   socket.on('chat', function chatHandler(msg){
-   $('#comments').append($('<li>').html(msg));
-   scroll();
-   });
+     /*
+    socket.on('chat', function chatHandler(msg){
+    $('#comments').append($('<li>').html(msg));
+    scroll();
+    });*/
 
 });
+
+
+function commentDB(){
+    document.getElementById("commentsReceive").innerHTML = "fuck yes"; 
+
+}

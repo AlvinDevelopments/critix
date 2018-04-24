@@ -121,23 +121,24 @@ router.post('/login', function(req, res){
   console.log(username);
   console.log(password);
 
+  // Search through the database
   User.findOne({username: username, password: password}, function(err, user){
-
+      // if there was an err searching console log it
       if(err){
           console.log(err);
           return res.status(500).send();
       }
+      // if the user does not exist in the database send error message
       else if(user==null){
-          // return res.status(404).send();
-          //res.render('index', {login: false, errorMsg: "Incorrect Username/Password"});
           req.session.loginStatus = false;
-          res.redirect('/')
-      }else{
-
+          res.render('index', {login: req.session.loginStatus, errorMsg: "Incorrect Username/Password"});
+      }
+      // Successful login
+      else{
       req.session.user = user;
       req.session.loginStatus = true;
-      return res.redirect('/');
-    }
+      res.redirect('/');
+      }
   });
 
 });
@@ -157,6 +158,7 @@ router.get('/register', function(req, res){
 
 // Submit registration request
 router.post('/register', function(req, res){
+  // get form input
   var username = req.body.username;
   var password = req.body.password;
   var firstname = req.body.firstname;
@@ -166,44 +168,20 @@ router.post('/register', function(req, res){
   console.log(firstname);
   console.log(lastname);
 
+  // create a new user for the database
   var newUser = new User();
   newUser.username = username;
   newUser.password = password;
   newUser.firstname = firstname;
   newUser.lastname = lastname;
-
+  // save user info to database
   newUser.save(function(err, savedUser){
       if(err){
           console.log(err);
-          // return res.status(500).send();
       }
       return res.render('index', {login: req.session.loginStatus});
   })
 })
-
-// UPLOAD SAVE STUFF 
-/*
-router.post('/upload', function(req,res){
-  //var post_id = "";
-  
-  var queryAuthor = Users.find();
-  var author = queryAuthor.find({'username':req.query.username});
-  
-  var title = req.body.title;
-  var filepath = "/" + author + "/" + title;
-  var caption = req.body.caption;
-
-console.log(req.query.username);
-
-  // Store 
-  var newPost = new Post();
-  newPost.author = username;
-  newPost.title = title;
-  newPost.caption = caption;
-  newPost.
-
-})
-*/
 
 
 // Alvin's stuff below--------

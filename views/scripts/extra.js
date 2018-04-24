@@ -45,6 +45,33 @@ function validatePassword(){
 password.onchange = validatePassword;
 confirm_password.onkeyup = validatePassword;
 
+// Upload File
+function filePreview(){
+    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID 
+
+    // Limit File Size
+    let fileType = imageFile.files[0].type;
+
+    if ('files' in imageFile) {
+        //let reader = new FileReader();
+        //let fileContent = URL.createObjectURL(imageFile.files[0]);
+        let fileContent = null;
+
+        var preview = document.querySelector('img');
+        var filez   = document.querySelector('input[type=file]').files[0];
+        var reader  = new FileReader();
+    
+        reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        }, false);
+    
+        if (filez) {
+        fileContent = reader.readAsDataURL(filez);
+        preview.src = reader.result;
+        }
+    }
+}   
+
 
 
   

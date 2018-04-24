@@ -112,6 +112,7 @@ if ('files' in imageFile) {
                     var imgFilename = "";
                     var imgCaption = "";
 
+                    let i = 0;
                     for (i = 0; i < 2 ;i++) {
                         if (i == 0){
                             imgFilename = x.elements[i].value;
@@ -124,10 +125,36 @@ if ('files' in imageFile) {
                     // Success Message to HTML Page
                     txt += "Upload of " + fileName + " was successful ";
                     txt += "<br>Filename: " + imgFilename + "<br>Caption: " + imgCaption;
-                    document.getElementById ("uploadResponse").innerHTML = txt; // DO WE NEED THIS?
+
                     console.log("Before database push");
 
                     // Push to DB
+                    //let reader = new FileReader();
+                    //let fileContent = URL.createObjectURL(imageFile.files[0]);
+                    let fileContent = null;
+
+                    var preview = document.querySelector('img');
+                    var filez    = document.querySelector('input[type=file]').files[0];
+                    var reader  = new FileReader();
+                  
+                    reader.addEventListener("load", function () {
+                      preview.src = reader.result;
+                    }, false);
+                  
+                    if (filez) {
+                      fileContent = reader.readAsDataURL(filez);
+                      preview.src = reader.result;
+                    }
+
+              
+                    var request = new XMLHttpRequest();
+                    request.open("POST", "/upload", true);
+                    request.setRequestHeader('enctype','multipart/form-data');
+                    let data = new FormData();
+                    console.log(data);
+                    data.append('myWave',fileContent);
+                    console.log(data);
+                    request.send(data);
 
                 }
             }

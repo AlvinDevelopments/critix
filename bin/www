@@ -20,9 +20,10 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Lis seten on provided port, on all network interfaces.
  */
 
 server.listen(port);
@@ -87,3 +88,46 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+/*
+SOCKET.IO STUFF
+*/
+io.on('connection', function(socket){
+  socket.emit('chat', "HELLO");
+
+  // THIS IS WHERE TO LOOK FOR COMMENTS 
+  socket.on('comment', function(msg){
+
+    // Get username here
+
+    // msg = combination of comment + vote? 
+    //Can use vote as a string then split with a delimiter
+    
+    let vote = msg[0];
+    let comment = msg[1];
+
+
+    // Push username + comment to db
+
+    // emit 
+
+  });
+
+  // Listen on chat
+  socket.on('chat', function(msg){
+    socket.emit('chat', "Put this #comments div into a comments box")
+    socket.emit('chat', msg);
+    // Just emit message
+    let timestamp = new Date().toLocaleTimeString();
+    let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();
+    chatMessage = chatMessage.fontcolor(socket.userColor);
+    socket.emit('userchat', chatMessage.bold());
+    socket.broadcast.emit('chat', chatMessage);
+  });
+
+  // Remove From UserList on Disconnect
+  socket.on('disconnect', function(msg){
+      let index = null;
+  });
+})

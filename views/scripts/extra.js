@@ -63,6 +63,7 @@ function filePreview(){
 
         reader.addEventListener("load", function () {
         preview.src = reader.result;
+        preview.style.display = "inline";
         }, false);
 
         if (filez) {

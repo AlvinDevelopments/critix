@@ -191,6 +191,7 @@ router.post('/register', function(req, res){
   })
 })
 
+<<<<<<< HEAD
 // UPLOAD SAVE STUFF
 /*
 router.post('/upload', function(req,res){
@@ -215,6 +216,8 @@ console.log(req.query.username);
 })
 */
 
+=======
+>>>>>>> master
 
 // Alvin's stuff below--------
 

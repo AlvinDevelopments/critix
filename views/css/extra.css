@@ -56,3 +56,19 @@
 .post-username a:after {
     content:": ";
 }
+<<<<<<< HEAD
+=======
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: black;
+    text-align: center;
+    vertical-align: center;
+}
+>>>>>>> master

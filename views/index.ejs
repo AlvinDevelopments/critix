@@ -69,11 +69,11 @@
                         </div>
                         <div class="row" style="margin: 5px;">
                             <div class="input-field col s6">
-                                <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="signup_pw" name="password" type="password" class="" required>
+                                <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="signup_pw" name="password" type="password" onchange="validatePassword()" required>
                                 <label for="signup_pw">Password*</label>
                             </div>
                             <div class="input-field col s6">
-                                <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="confirm_pw" type="password" class="" onchange="" required>
+                                <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="confirm_pw" type="password" onkeyup="validatePassword()" required>
                                 <label for="confirm_pw">Confirm Password*</label>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
         </div>
 
         <!--POST MODAL-->
-        <div id="modal_post" class="modal modal-fixed-footer">
+        <div id="modal_post" class="modal modal-fixed-footer" style="width: 70%; height: 90%">
                 <div class="modal-content">
                     <div class="row" style="max-height:inherit;">
                         <div class="col s12 m8" style="max-height:inherit;">

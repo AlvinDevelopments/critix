@@ -319,6 +319,7 @@ router.get('/post/:_id',(req,res)=>{
       res.render('post',{
         file: post,
         filetype: 'jpg',
+          login: req.session.loginStatus,
         // comments: comments;
       });
     }

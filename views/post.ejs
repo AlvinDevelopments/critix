@@ -1,47 +1,282 @@
 <!DOCTYPE html>
-<html class="has-navbar-fixed-bottom">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tattune | View Your Music</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/extra.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/extra.css" media="screen,projection"/>
+    <!--JavaScript-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/materialize.js"></script>
+    <script type="text/javascript" src="/scripts/extra.js"></script>
+    <script type="text/javascript" src="/scripts/uploadFunctions.js"></script>
+    <script type="text/javascript" src="/scripts/main.js"></script>
     <script type="text/javascript" src="/scripts/post.js"></script>
-
 </head>
-<!-- <body onload="fetchComments(<%=file._id.toString()%>)"> -->
-<body onload="fetchComments('<%=file._id.toString()%>')">
-  <h1><%= file.title %></h1>
-  <h2>Uploaded on <%= file.date.toISOString().slice(0,10).replace(/-/g,"/"); %> </h2>
 
-  <div class="center">
-  <div class="posts">
-  <div class="containerz">
-  <img class="post" src="../uploads/images/<%= file.filepath %>" type="image/<%= filetype %>">
-</div>
-</div>
-</div>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <div id="comments">
+    <style>
+
+    </style>
+</head>
+
+
+<!-- <body> -->
+<body onload="fetchComments('<%=file._id.toString()%>'); setEnter();">
+  <div class="flow-text ">
+    <br>
+    <br>
+
+    <div style=" max-width: 100%; margin: 0 auto; width:70%;">
+      <!-- <h2><%= file._id %></h2>
+      <h4>Uploaded on <%= file.date.toISOString().slice(0,10).replace(/-/g,"/"); %> </h4> -->
+    </div>
   </div>
 
-<br>
+<div class="container">
+  <div class="row">
+    <div class="col s6">
 
-<!-- <form action='/comment' name="<%=file._id%>" method='post'> -->
-  <form>
-  <input style="width:80vw;" id="comment" type='text' name="comment"></input>
-  <input  type='submit' onclick="postComment('<%=file._id.toString()%>')"></input>
-</form>
+      <!-- the image -->
+
+        <div class="posts">
+          <div style=" max-width: 100%; margin: 0 auto; width:100%;" class="container">
+            <img class="responsive-img post" src="../uploads/images/<%= file.filepath %>" type="image/<%= filetype %>">
+          </div>
+        </div>
+    </div>
+
+
+  <div id="clickable" class="col s6">
+      <!-- <form method='post'> -->
+      <form class="row" id="c">
+        <!-- input field -->
+        <div class="input-field col s10"
+          <i class="material-icons prefix"></i>
+          <input id="comment" type='text' name="comment" autocomplete="off"></input>
+          <label id='placeholder' for="icon_prefix2">Write a comment...</label>
+        </div>
+        <!-- button -->
+        <button id="btnComment" class="col s2 waves-effect waves-light btn-small" type="button" onclick="postComment('<%=file._id.toString()%>')">COMMENT</button>
+      </form>
+
+
+
+    <!-- comments -->
+    <div class="limiter">
+      <div class="row"id="comments">
+      </div>
+    </div>
+
+
+</div>
+</div>
+
+
+
+</div>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal" style="width: 30%;">
+    <form action='/login' method='post'>
+        <div class="modal-content">
+            <h1 style="text-align: center;">Login</h1>
+
+            <div class="input-field col s12">
+                <input id="username" name="username" type="text" required>
+                <label for="username">Username</label>
+            </div>
+
+            <div class="input-field col s12">
+                <input id="password" name="password" type="password" required>
+                <label for="password">Password</label>
+            </div>
+
+            <div class="level is-marginless">
+                    <div class="level-item">
+                            <p class="help" id="errorMsg" style="color: red;"><%= typeof errorMsg !='undefined' ? errorMsg:''%> </p>
+                    </div>
+            </div>
+
+            <div class="row" style="text-align: center;">
+                <button id ="login_submit" class="btn brown waves-effect waves-light" type="submit">Login
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+<!-- SIGNUP MODAL -->
+<div id="signupModal" class="modal" style="width: 60%;">
+        <form action='/register' method='post'>
+                <div class="row" style="margin: 5px;">
+                    <div class="input-field col s6">
+                        <input placeholder="e.g. iamcool69" id="signup_username" name="username" type="text" class="" required>
+                        <label for="signup_username">Username*</label>
+                        <span id="signup_username_help" class="helper-text" data-error="Cannot use this username" data-success="Username is available!"></span>
+                    </div>
+                </div>
+                <div class="row" style="margin: 5px;">
+                    <div class="input-field col s6">
+                        <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="signup_pw" name="password" type="password" class="" required>
+                        <label for="signup_pw">Password*</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" id="confirm_pw" type="password" class="" onchange="" required>
+                        <label for="confirm_pw">Confirm Password*</label>
+                    </div>
+                </div>
+                <div class="row" style="margin: 5px;">
+                    <div class="input-field col s6">
+                        <input placeholder="First Name" id="signup_fname" name="firstname" type="text">
+                        <label for="signup_fname">Full Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Last Name" id="signup_lname" name="lastname" type="text">
+                    </div>
+                </div>
+                <div class="row center-align">
+                    <sub>* required fields</sub>
+                </div>
+                <div class="row center-align">
+                        <button id ="signup_submit" class="btn brown waves-effect waves-light" type="submit">Sign up
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+            </form>
+    </div>
+
+<!-- UPLOAD MODAL -->
+<div id="uploadModal" class="modal">
+    <h1 style="text-align: center;">Upload Image</h1>
+
+
+    <form action='/upload' method='post' enctype="multipart/form-data" class="modal-content animate" id="customNames" >
+    <div class="imgcontainer">
+        <span onclick="document.getElementById('uploadModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+
+    <!-- User Entry-->
+    <div class="container">
+
+        <!-- Custom Filename -->
+        <label for="tite"><b>Post Title</b></label>
+        <input type="text" placeholder="Enter Filename" name="upload_title" required>
+
+        <!-- Captions-->
+        <label for="tite"><b>Caption</b></label>
+        <textarea rows="10%" cols="100%" placeholder="Enter caption..." name="caption" form="customNames" required></textarea>
+
+        <!-- Choose File -->
+        <input class = "file-input" type="file" name = "image_file" id="imageFileUpload" multiple size="50"  onchange="filePreview()" required>
+        <img src="" height="200" alt="Image preview...">
+
+        <!-- Close Modal-->
+        <!-- Comment
+        <button type="button" id="confirmation" onclick="toDatabaseUpload()" class="cancelbtn">
+            Upload File
+        </button>
+        <button type="button"  onclick="document.getElementById('uploadModal').style.display='none'" class="cancelbtn">
+            Cancel
+        </button>
+        <div id="uploadResponse"></div>
+
+        -->
+
+        <div class="row center-align">
+                <button id ="upload_submit" class="btn brown waves-effect waves-light" type="submit">Upload
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+
+
+    </div>
+
+
+
+    </form>
+</div>
+
+
+
+<% if(login){ %>
+<div class="navbar-fixed">
+<nav>
+    <div class="nav-wrapper brown">
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a a class="btn brown waves-effect waves-light btn" href="/logout">Logout</a></li>
+        </ul>
+        <a href="/" class="brand-logo center">Critix</a>
+        <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+            <!-- <li><a href="signup.html">Upload</a></li> -->
+            <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
+            <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
+        </ul>
+    </div>
+</nav>
+<ul class="sidenav" id="mobilesidenav">
+    <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#uploadModal">Upload</a></li>
+    <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
+</ul>
+</div>
+<% } else{ %>
+<div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper brown">
+                <a href="/" class="brand-logo center">Critix</a>
+                <a href="#" data-target="mobilesidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#signupModal">Sign up</a></li>
+                    <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#loginModal" >Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <ul class="sidenav" id="mobilesidenav">
+            <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#signupModal">Sign in</a></li>
+            <li><a class="btn brown waves-effect waves-light btn modal-trigger" href="#loginModal">Login</a></li>
+        </ul>
+</div>
+
+
+<% } %>
+<ul class="sidenav" id="mobilesidenav">
+</ul>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("Error msg length " + document.getElementById("errorMsg").innerHTML);
+        if(document.getElementById("errorMsg").innerHTML.trim() != ""){
+            $('#loginModal').modal("open");
+        }
+    });
+
+</script>
 
 
 </body>
 
 <style>
-  html{
-    /* background-color: white; */
+.limiter{
+  height:59vh;
+}
+  .user_comment{
+    padding-top:3%;
+    padding-bottom:1%;
   }
+
+  #comments{
+    height: 100%;
+    overflow-y: auto;
+  }
+
 </style>
 </html>

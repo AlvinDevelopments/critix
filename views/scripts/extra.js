@@ -31,23 +31,22 @@ $(document).ready(function(){
 //    $('.modal').modal("open");
   });
 
-var password = document.getElementById("signup_pw")
-, confirm_password = document.getElementById("confirm_pw");
+
 
 function validatePassword(){
-  if(password.value != confirm_password.value) {
-    confirm_password.setCustomValidity("Password Does Not Match");
-  } else {
-    confirm_password.setCustomValidity('');
-  }
+    var password = document.getElementById("signup_pw")
+    , confirm_password = document.getElementById("confirm_pw");
+    if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Password Does Not Match");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
 }
 
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
 
 // Upload File
 function filePreview(){
-    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID
+    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID 
 
     // Limit File Size
     let fileType = imageFile.files[0].type;
@@ -60,14 +59,15 @@ function filePreview(){
         var preview = document.querySelector('img');
         var filez   = document.querySelector('input[type=file]').files[0];
         var reader  = new FileReader();
-
+    
         reader.addEventListener("load", function () {
         preview.src = reader.result;
+        preview.style.display = "inline";
         }, false);
-
+    
         if (filez) {
         fileContent = reader.readAsDataURL(filez);
         preview.src = reader.result;
         }
     }
-}
+}   

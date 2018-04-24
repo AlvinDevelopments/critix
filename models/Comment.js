@@ -10,3 +10,7 @@ var commentSchema = new mongoose.Schema({
 
 var Comment = mongoose.model('comments', commentSchema);
 module.exports = Comment;
+
+function commentDB(){
+    console.log('asdfasdfa');
+}

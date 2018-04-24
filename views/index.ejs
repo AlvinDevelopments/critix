@@ -143,9 +143,33 @@
 
         
         <div id="comments">Comments Here</div>
-        <div id="submit">
-            <form action="">
-                <input id="m" autocomplete="off" /><button>Send</button>
+        <div id="yourUsername">Your Username: 
+                <li><a href="/login"><%= typeof user !='undefined' ? user:''%></a></li>
+        </div>
+        <div id="commentsReceive"></div>
+        <div id="comment_submit">
+            <!--<form id="commentForm" action='/upload' method='post'></form> Temp comment for later -->
+            <form id="commentForm" action="">
+
+                <!-- Get Post ID Here-->
+
+
+                <!-- This is the username -->
+                <a href="/login" id="author"><%= typeof user !='undefined' ? user:''%></a>
+
+                
+                <!-- Send this as comment to DB -->
+                <input id="postComment" autocomplete="off" />
+
+                <!-- Send all to DB 
+                    comment_id: String,
+                    comment: String,
+                    author: String,
+                    post_id: String,
+                    time: Date
+                -->
+
+                <button  onclick="commentDB()" >Send</button>
             </form>
         </div>
 

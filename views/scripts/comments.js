@@ -15,6 +15,9 @@ $(function chatHandler() {
          scroll();
      });
 
+     function commentDB(){
+    console.log('asdfasdfa');
+}
      /*
     socket.on('chat', function chatHandler(msg){
     $('#comments').append($('<li>').html(msg));

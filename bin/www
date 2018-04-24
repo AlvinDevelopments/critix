@@ -94,7 +94,7 @@ function onListening() {
 // SOCKETIO STUFF
 
 io.on('connection', function(socket){
-  socket.emit('chat', "HELLO" + socket.toString);
+  socket.emit('chat', "HELLO");
 
   // THIS IS WHERE TO LOOK FOR COMMENTS 
 

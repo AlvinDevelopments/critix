@@ -152,7 +152,7 @@ if ('files' in imageFile) {
                     request.setRequestHeader('enctype','multipart/form-data');
                     let data = new FormData();
                     console.log(data);
-                    data.append('myWave',fileContent);
+                    data.append('filepath',fileContent);
                     console.log(data);
                     request.send(data);
 

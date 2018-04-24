@@ -51,7 +51,7 @@ router.get('/upload', function(req,res){
 })
 
 // Retrieve Comments for post_id
-router.post('/loadComments', functions.checkIfLoggedIn(), function(req,res){
+router.post('/loadComments', function(req,res){
 
   let format = req.query.format;
   type = req.query.type;
@@ -101,20 +101,72 @@ router.post('/postComment', functions.checkIfLoggedIn(), function(req,res){
       }
       else{
         console.log("sent to db");
-          console.log("returning to post "+backURL);
+        console.log("returning to post "+backURL);
         // res.render(backURL);
         // console.log(post);
         // res.send(comment);
-        return res.status(200).send();
+        // return res.status(200).send('wow');
+        // res.send('sucess');
       }
     });
 
+    return res.status(200).send('wow');
 
+});
+
+
+
+router.get('/test',function(req,res){
+  console.log('console log of the test.');
+  res.send('hi, this is a test!');
+});
+
+// Submit Login Credentials
+router.post('/login', function(req, res){
+  console.log(req);
+  var username = req.body.username;
+  var password = req.body.password;
+  console.log(username);
+  console.log(password);
+
+  // Search through the database
+  User.findOne({username: username, password: password}, function(err, user){
+      // if there was an err searching console log it
+      if(err){
+          console.log(err);
+          return res.status(500).send();
+      }
+      // if the user does not exist in the database send error message
+      else if(user==null){
+          req.session.loginStatus = false;
+          res.render('index', {login: req.session.loginStatus, errorMsg: "Incorrect Username/Password"});
+      }
+      // Successful login
+      else{
+      req.session.user = user;
+      req.session.loginStatus = true;
+      res.redirect('/');
+      }
+  });
+
+});
+
+router.get('/logout', function(req, res){
+    req.session.destroy();
+
+    res.redirect('/');
+    //return res.status(200).send();
+})
+
+// Retrieve registration page
+router.get('/register', function(req, res){
+  res.render('signup');
 });
 
 
 // Submit registration request
 router.post('/register', function(req, res){
+  // get form input
   var username = req.body.username;
   var password = req.body.password;
   var firstname = req.body.firstname;
@@ -124,16 +176,16 @@ router.post('/register', function(req, res){
   console.log(firstname);
   console.log(lastname);
 
+  // create a new user for the database
   var newUser = new User();
   newUser.username = username;
   newUser.password = password;
   newUser.firstname = firstname;
   newUser.lastname = lastname;
-
+  // save user info to database
   newUser.save(function(err, savedUser){
       if(err){
           console.log(err);
-          // return res.status(500).send();
       }
       return res.render('index', {login: req.session.loginStatus});
   })

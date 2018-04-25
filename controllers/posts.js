@@ -93,7 +93,7 @@ router.get('/discover',function(req,res){
 
 
 // Retrieves the server filepath of a file based on post_id and displays it
-router.get('/post/:_id',(req,res)=>{
+router.post('/post/:_id',(req,res)=>{
   // console.log('generating post');
 
   let query = Post.findOne({'_id':ObjectID(req.params._id)});
@@ -108,10 +108,9 @@ router.get('/post/:_id',(req,res)=>{
     else{
       // console.log(post._id);
 
-      res.render('post',{
+      res.send({
         file: post,
         filetype: 'jpg',
-          login: req.session.loginStatus,
         // comments: comments;
       });
     }

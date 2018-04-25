@@ -95,6 +95,7 @@ SOCKET.IO STUFF
 */
 io.on('connection', function(socket){
   console.log('socket.io started...');
+  // console.log(socket);
 
 
   socket.on('join',function(msg){

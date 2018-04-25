@@ -1,45 +1,45 @@
-function socketListener(id){
-
-  console.log('window opened');
-
-  var socket = io.connect();
-  socket.emit("join",id);
-
-
-  
-  socket.on('get update', function(msg){
-      console.log('getting new updates');
-      fetchComments(id);
-  });
-
-  $('#btnComment').click(function(event){
-      // var socket = io.connect();
-      console.log("posting!!!    "+id);
-      // let c = $('#comment').find('input[name="comment"]').val();
-      let c = $('#comment').val();
-      // console.log(c);
-      $.ajax({
-        type: 'POST',
-        url: '/postComment',
-        data: {comment:c,post_id:id},
-        headers:{
-          'Access-Control-Allow-Origin': '*',
-          'processData': 'false',
-        },
-        success: function(result,status,xhr){
-          $('#comment').val('');
-          fetchComments(id);
-          socket.emit('ping update', id);
-          // let res = $('#comments');
-          // fetchComments(id);
-        }
-      });
-
-    return false;
-
-  });
-
-}
+// function socketListener(id){
+//
+//   console.log('window opened');
+//
+//   var socket = io.connect();
+//   socket.emit("join",id);
+//
+//
+//
+//   socket.on('get update', function(msg){
+//       console.log('getting new updates');
+//       fetchComments(id);
+//   });
+//
+//   $('#btnComment').click(function(event){
+//       // var socket = io.connect();
+//       console.log("posting!!!    "+id);
+//       // let c = $('#comment').find('input[name="comment"]').val();
+//       let c = $('#comment').val();
+//       // console.log(c);
+//       $.ajax({
+//         type: 'POST',
+//         url: '/postComment',
+//         data: {comment:c,post_id:id},
+//         headers:{
+//           'Access-Control-Allow-Origin': '*',
+//           'processData': 'false',
+//         },
+//         success: function(result,status,xhr){
+//           $('#comment').val('');
+//           fetchComments(id);
+//           socket.emit('ping update', id);
+//           // let res = $('#comments');
+//           // fetchComments(id);
+//         }
+//       });
+//
+//     return false;
+//
+//   });
+//
+// }
 
 
 // Get the input field
@@ -79,9 +79,7 @@ function setEnter(){
 
 function fetchComments(id){
 
-  let res = $('#comments');
-  // console.log(res);
-  // res.append('lolofwefleowflweoflwefloweflwfelfl');
+  let res = $('#commentList');
   // console.log('fetching!!!');
   // console.log(id);
   $.ajax({

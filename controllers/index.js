@@ -86,6 +86,11 @@ router.get('/logout', function(req, res){
     //return res.status(200).send();
 });
 
+router.post('/checkIfLoggedIn',function(req,res){
+  console.log(req.session.loginStatus);
+  res.send(req.session.loginStatus);
+});
+
 // // Retrieve Sign Up Page
 // router.get('/register', function(req,res){
 //   res.render('signup');

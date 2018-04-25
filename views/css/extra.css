@@ -3,6 +3,10 @@
     bottom: 0px !important ;
 }
 
+body{
+  background: #95e5bd;
+}
+
 .modal-img {
     max-height:600px;
     max-width:100%;

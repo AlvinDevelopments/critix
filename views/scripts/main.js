@@ -1,3 +1,4 @@
+
 function loadPosts(){
 
 
@@ -31,10 +32,19 @@ function loadPosts(){
           }
 
           html+='<div class="col s12 m6 l3">';
-          html+='<div class="thumbnail hoverable">';
-          html+='<a href="/post/';
-          html+=typeof post._id.toString() !='undefined' ? post._id.toString():'';
-          html+='"> <img class="" src="/uploads/images/';
+          html+='<div id="';
+          html+=post._id.toString();
+          html+='"class="thumbnail hoverable">';
+          // html+='<a href="/post/';
+          html+='<a class="modal-trigger" href="#modal_post" onclick="loadModalImg(';
+          html+="'"
+          html+=post._id.toString();
+          html+="'"
+          // html+='); socketListener();';
+          html+=');';
+          // html+=typeof post._id.toString() !='undefined' ? post._id.toString():'';
+          html+='">';
+          html+='<img class="" src="/uploads/images/';
           html+=typeof post.post_id !='undefined' ? post.post_id:'';
           html+='" type="image/';
           html+=post.filetype;

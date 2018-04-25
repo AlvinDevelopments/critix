@@ -23,7 +23,7 @@ router.post('/loadComments', function(req,res){
   let queryComments = Comment.find();
   // queryComments.find({'post_id':req.query.post_id});
   queryComments.find({'post_id':req.body.post_id});
-  queryComments.select('author comment time');
+  queryComments.select('author comment time rating');
   // console.log(req.body.post_id);
 
   queryComments.exec(function(err,comments){
@@ -49,6 +49,7 @@ router.post('/postComment', function(req,res){
   comment.post_id = req.body.post_id;
   comment.author = req.session.user.username;
   comment.time = Date.now();
+  comment.rating = req.body.rating;
 
     comment.save(function(err){
       if(err){

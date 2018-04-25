@@ -94,7 +94,12 @@ function onListening() {
 SOCKET.IO STUFF
 */
 io.on('connection', function(socket){
-  console.log('socket.io started...')
+  console.log('socket.io started...');
+
+
+  socket.on('join',function(msg){
+    socket.join(msg);
+  });
 
   // THIS IS WHERE TO LOOK FOR COMMENTS
   socket.on('comment', function(msg){
@@ -112,7 +117,7 @@ io.on('connection', function(socket){
   // receive an update ping
   socket.on('ping update', function(msg){
     console.log('sending an update ping!!!');
-    socket.broadcast.emit('get update', 'chatMessage');
+    socket.broadcast.to(msg).emit('get update', '');
   });
 
   // Remove From UserList on Disconnect

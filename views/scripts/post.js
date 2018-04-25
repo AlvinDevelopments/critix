@@ -3,7 +3,10 @@ function socketListener(id){
   console.log('window opened');
 
   var socket = io.connect();
+  socket.emit("join",id);
 
+
+  
   socket.on('get update', function(msg){
       console.log('getting new updates');
       fetchComments(id);
@@ -26,7 +29,7 @@ function socketListener(id){
         success: function(result,status,xhr){
           $('#comment').val('');
           fetchComments(id);
-          socket.emit('ping update', 'haha');
+          socket.emit('ping update', id);
           // let res = $('#comments');
           // fetchComments(id);
         }

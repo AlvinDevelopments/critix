@@ -24,6 +24,15 @@ function loadPosts(){
 
       result.posts.forEach( function(post){
 
+        // let img = document.createElement("img");
+        // img.setAttribute('src',post._id.toString());
+        // img.setAttribute('height', '1px');
+        // img.setAttribute('width', '1px');
+        //
+        // let thumbnail = getThumbnail(img, 1/5);
+        // document.body.appendChild(thumbnail);
+        // console.log(thumbnail);
+
           if(count>=numCols){
             html+='</div>';
             // html+='<div class="section"></div>';
@@ -61,4 +70,16 @@ function loadPosts(){
     }
   });
 
+}
+
+
+function getThumbnail(original, scale) {
+  var canvas = document.createElement("canvas");
+
+  canvas.width = original.width * scale;
+  canvas.height = original.height * scale;
+
+  canvas.getContext("2d").drawImage(original, 0, 0, canvas.width, canvas.height);
+
+  return canvas
 }

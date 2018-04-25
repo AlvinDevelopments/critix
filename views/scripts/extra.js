@@ -142,6 +142,10 @@ function socketListener(id){
           socket.emit('ping update', id);
           // let res = $('#comments');
           // fetchComments(id);
+        },
+        error: function(result,status,xhr){
+          $('#errorMsg').html('<b style="color:red;">ERROR: NOT SIGNED IN.</b>');
+          print("not signed in!!!!");
         }
       });
 
@@ -246,6 +250,35 @@ function fetchComments(id){
 
     }
   });
+}
+
+
+// Upload File
+function filePreview(){
+    let imageFile = document.getElementById("imageFileUpload"); // CHANGE THE ID
+
+    // Limit File Size
+    let fileType = imageFile.files[0].type;
+
+    if ('files' in imageFile) {
+        //let reader = new FileReader();
+        //let fileContent = URL.createObjectURL(imageFile.files[0]);
+        let fileContent = null;
+
+        var preview = document.querySelector('img');
+        var filez   = document.querySelector('input[type=file]').files[0];
+        var reader  = new FileReader();
+
+        reader.addEventListener("load", function () {
+        preview.src = reader.result;
+        preview.style.display = "inline";
+        }, false);
+
+        if (filez) {
+        fileContent = reader.readAsDataURL(filez);
+        preview.src = reader.result;
+        }
+    }
 }
 
 

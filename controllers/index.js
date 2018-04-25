@@ -54,11 +54,8 @@ var router = express.Router();
 
 // Submit Login Credentials
 router.post('/login', function(req, res){
-  // console.log(req);
   var username = req.body.username;
   var password = req.body.password;
-  // console.log(username);
-  // console.log(password);
 
   // Search through the database
   User.findOne({username: username, password: password}, function(err, user){

@@ -1,9 +1,3 @@
-// document.addEventListener('DOMContentLoaded', () => {
-//   console.log('Hello Bulma!');
-// });
-
-
-
 function loadPosts(){
 
 
@@ -14,28 +8,6 @@ function loadPosts(){
       'Access-Control-Allow-Origin': '*',
     },
     success: function(result,status,xhr){
-      // console.log('retrieved images');
-      // res.append("LOL");
-      // console.log(result);
-
-      // // for(let i = 0; ;i++){
-      // result.posts.forEach( function(post){
-      //   $('#containerz').append('<div class="row">');
-      //   for(let j = 0; j<3;j++){
-      //     $('#containerz').append('<div class="col s11 m3">');
-      //     $('#containerz').append('<div class="thumbnail hoverable">');
-      //     $('#containerz').append('<a href="/post/');
-      //     $('#containerz').append(typeof post._id.toString() !='undefined' ? post._id.toString():'');
-      //     $('#containerz').append('"> <img class="post" src="/uploads/images/');
-      //     $('#containerz').append(typeof post.post_id !='undefined' ? post.post_id:'');
-      //     $('#containerz').append('" type="image/');
-      //     $('#containerz').append(post.filetype);
-      //     $('#containerz').append('"></a>');
-      //
-      //   }
-      //   $('containerz').append('</div>');
-      //   console.log($('#containerz'));
-      // });
 
       let html = '';
       let count = 0;
@@ -46,6 +18,8 @@ function loadPosts(){
       html+='<div class="section"></div>';
       html+='<div class="section"></div>';
       html+='<div class="row">';
+
+      console.log(result);
 
       result.posts.forEach( function(post){
 
@@ -74,11 +48,7 @@ function loadPosts(){
       // html+='</div>';
       $('#containerz.container').html(html);
 
-
     }
   });
-
-
-
 
 }

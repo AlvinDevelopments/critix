@@ -25,6 +25,8 @@ mongoose.connect('mongodb://localhost/test', function(err){
 
 
 var indexRouter = require('./controllers/index');
+var commentsRouter = require('./controllers/comments');
+var postsRouter = require('./controllers/posts');
 // var usersRouter = require('./routes/users');
 
 
@@ -42,7 +44,6 @@ app.use('/discover',express.static('./public'));
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'hbs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -56,7 +57,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/post',express.static('./views'));
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/', commentsRouter);
+app.use('/', postsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

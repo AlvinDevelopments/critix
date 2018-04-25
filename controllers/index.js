@@ -1,113 +1,56 @@
-// var express = require('express');
-
-var mongoose = require('mongoose');
-
 // Models
 const User = require('../models/User');
 const Comment = require('../models/Comment');
 const Post = require('../models/Post');
 
-
 let functions = require('../lib/functions');
-
-
 const express = require('express');
-
 var router = express.Router();
 
-const ejs = require('ejs');
-var path = require('path');
-// const bodyParser = require('body-parser');
-const multer = require('multer');
-// const path = require('path');
-// const mongoose = require('mongoose');
-const ObjectID = require('mongodb').ObjectID;
+// var mongoose = require('mongoose');
+// const ObjectID = require('mongodb').ObjectID;
+// var path = require('path');
+// const ejs = require('ejs');
+// const multer = require('multer');
 
 
-var ObjectId = require('mongodb').ObjectID;
-// const waveSurf = require('../lib/fileHandler.js');
-// const moment = require('moment');
+// Renders the main page if user is logged in.
+// router.get('/',functions.checkIfLoggedIn(),function(req,res){
+  router.get('/',function(req,res){
+    let username = 'guest';
+    if(req.session.loginStatus){
+      username = req.session.user.username;
+      // console.log(req.session.user.username);
+    }
 
+    let query = Post.find();
+    query.select('_id post_id');
 
+    query.exec(function(err,posts){
+      if(err){
+        res.render('index',{
+          msg: err
+        });
+      }
+      else{
+        // console.log(posts);
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//     res.render('index', { title: 'Express' });
-// });
+        res.render('index',{
+          posts: posts,
+          filetype: 'jpg',
+          login: req.session.loginStatus,
+          user: username
+        });
+      }
+    });
+  }
+);
+
 
 // Retrieve Log In Page
-router.get('/login', function(req,res){
-  res.render('login');
-})
-
-// Retrieve Sign Up Page
-router.get('/signup', function(req,res){
-  res.render('signup');
-})
-
-// Retrieve Upload  Page
-router.get('/upload', function(req,res){
-  res.render('upload');
-})
-
-// Retrieve Comments for post_id
-router.post('/loadComments', function(req,res){
-
-  let format = req.query.format;
-  type = req.query.type;
-
-  let queryComments = Comment.find();
-  // queryComments.find({'post_id':req.query.post_id});
-  queryComments.find({'post_id':req.body.post_id});
-  queryComments.select('author comment time');
-  // console.log(req.query.post_id);
-  // console.log(req.body.post_id);
-
-  queryComments.exec(function(err,comments){
-    if(err){
-      res.render('index',{
-        msg: err
-      });
-    }
-    else{
-      res.send(comments);
-      // console.log('current comments: '+comments);
-    }
-  });
-
-});
-
-
-
-router.post('/postComment', function(req,res){
-  console.log('posting a comment: '+req.body.comment);
-
-  let comment = new Comment();
-
-  comment.comment = req.body.comment;
-  comment.post_id = req.body.post_id;
-  comment.author = req.session.user.username;
-  comment.time = Date.now();
-
-    comment.save(function(err){
-      // if(err){
-      //   console.log("FAILED");
-      //   console.log(err);
-      // }
-      // else{
-      //   console.log("sent to db");
-      // }
-    });
-
-    res.status(200).send();
-
-});
-
-
-
-
-
-
+// router.get('/login', function(req,res){
+//   res.render('login');
+// });
 
 // Submit Login Credentials
 router.post('/login', function(req, res){
@@ -139,17 +82,17 @@ router.post('/login', function(req, res){
 
 });
 
+
 router.get('/logout', function(req, res){
     req.session.destroy();
-
     res.redirect('/');
     //return res.status(200).send();
-})
-
-// Retrieve registration page
-router.get('/register', function(req, res){
-  res.render('signup');
 });
+
+// // Retrieve Sign Up Page
+// router.get('/register', function(req,res){
+//   res.render('signup');
+// })
 
 
 // Submit registration request
@@ -179,200 +122,5 @@ router.post('/register', function(req, res){
   });
 });
 
-// Alvin's stuff below--------
-
-// loads login page
-// router.post('/login',authenticateCredentials(),function(req,res){
-//   // res.render('home');
-// });
-
-// Renders the main page if user is logged in.
-// router.get('/',functions.checkIfLoggedIn(),function(req,res){
-  router.get('/',function(req,res){
-    let username = 'guest';
-    if(req.session.loginStatus){
-      username = req.session.user.username;
-      console.log(req.session.user.username);
-    }
-
-    let query = Post.find();
-    query.select('_id post_id');
-
-    query.exec(function(err,posts){
-      if(err){
-        res.render('index',{
-          msg: err
-        });
-      }
-      else{
-        // console.log(posts);
-
-        res.render('index',{
-          posts: posts,
-          filetype: 'jpg',
-          login: req.session.loginStatus,
-          user: username
-        });
-      }
-    });
-  }
-
-
-
-
-
-);
-
-
-// Render Upload page
-router.get('/upload',function(req,res){
-  res.render('upload');
-  console.log('upload get');
-});
-
-// Upload a file to server and registers it as a post in DB
-router.post('/upload',(req,res)=>{
-  // console.log(req);
-	console.log("upload request");
-  // create post via post Schema
-  functions.upload(req,res,(err)=>{
-    console.log(req);
-    if(err){
-      console.log("failed")
-      return res.redirect('/');
-    }
-    else
-    {
-      if(req.file.path==undefined){
-        console.log("Error: No File Selected!'");
-        return res.redirect('/');
-      }
-      else{
-        let post = new Post();
-        let title = req.body.upload_title;
-        post.filepath = req.file.filename;
-        post.post_id = req.file.filename;
-        post.author = req.session.user.username;
-        post.title = req.body.upload_title;
-        post.caption = req.body.caption;
-        post.date = Date.now();
-
-        post.save(function(err){
-          if(err){
-            console.log("FAILED");
-            console.log(err);
-            return res.redirect('/');
-          }
-          else{
-            console.log("sent to db");
-            console.log(post);
-            return res.redirect('/');
-
-          }
-        })
-      }
-
-    }
-  })
-});
-
-
-// Retrieves the server filepath of a file based on post_id and displays it
-router.get('/post/:_id',(req,res)=>{
-  // console.log('generating post');
-
-  let query = Post.findOne({'_id':ObjectID(req.params._id)});
-  query.select('_id filepath title date caption author');
-
-  query.exec(function(err,post){
-    if(err){
-      res.render('index',{
-        msg: err
-      });
-    }
-    else{
-      // console.log(post._id);
-
-      res.render('post',{
-        file: post,
-        filetype: 'jpg',
-          login: req.session.loginStatus,
-        // comments: comments;
-      });
-    }
-  });
-
-
-});
-
-
-// // Post Comment
-// // Add a comment to an existing post.
-// router.post('/comment',(req,res)=>{
-//   let comment = new Comment();
-//
-//   let link = req.headers.referer;
-//   let parsed = link.split('/');
-//   let id = parsed[parsed.length-1];
-//   comment.post_id = id;
-//   console.log(id);
-//   comment.comment = req.body.comment;
-//   // comment.author = req.session.user.username;
-//   // comment.post_id = req;
-//   comment.date = Date.now();
-//
-//   comment.save(function(err){
-//     if(err){
-//       console.log("FAILED");
-//       console.log(err);
-//       // return res.status(500).send();
-//     }
-//     else{
-//       console.log("sent to db");
-//       // console.log(post);
-//       // res.status(200).send({
-//       //   comment: comment
-//       // });
-//       // console.log(req);
-//       // res.redirect('/post/undefined-1523845557148.png',{
-//       //   comment: comment
-//       // });
-//
-//       let link = req.headers.referer;
-//
-//       res.redirect(link);
-//
-//     }
-//   });
-// });
-
-
-
-// Displays all posts uploaded
-router.get('/discover',function(req,res){
-  let query = Post.find();
-  query.select('_id post_id');
-
-  query.exec(function(err,posts){
-    if(err){
-      res.render('index',{
-        msg: err
-      });
-    }
-    else{
-      // console.log(posts);
-
-      // res.render('discover',{
-      //   posts: posts,
-      //   filetype: 'jpg'
-      // });
-
-      return res.send({
-        posts: posts,
-        filetype: 'jpg'
-      });
-    }
-  });
-});
 
 module.exports = router;

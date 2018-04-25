@@ -1,10 +1,29 @@
+function socketListener(id){
+
+  console.log('window opened');
+
+  var socket = io.connect();
+
+  socket.on('get update', function(msg){
+      console.log('getting new updates');
+      fetchComments(id);
+  });
+
+  $('#btnComment').click(function(event){
+      $('#comment').val('');
+      console.log('button pressed');
+      socket.emit('ping update', 'lol');
+  });
+
+}
+
 
 // Get the input field
 function setEnter(){
 
-  console.log("listening...");
+  // console.log("listening...");
   var input = $('#clickable');
-  console.log(input);
+  // console.log(input);
   // Execute a function when the user releases a key on the keyboard
 
   input.focusin(function(){
@@ -18,13 +37,12 @@ function setEnter(){
   });
 
   input.keydown(function(event) {
-    console.log("listening...");
-
+    // console.log("listening...");
 
     if (event.keyCode === 13) {
       // Cancel the default action, if needed
       event.preventDefault();
-      console.log("DO NOT CLICK!!!");
+      // console.log("DO NOT CLICK!!!");
       // Trigger the button element with a click
       document.getElementById('btnComment').click();
 
@@ -40,7 +58,7 @@ function fetchComments(id){
   let res = $('#comments');
   // console.log(res);
   // res.append('lolofwefleowflweoflwefloweflwfelfl');
-  console.log('fetching!!!');
+  // console.log('fetching!!!');
   // console.log(id);
   $.ajax({
     type: 'POST',
@@ -50,9 +68,7 @@ function fetchComments(id){
       'Access-Control-Allow-Origin': '*',
     },
     success: function(result,status,xhr){
-      console.log('retrieved comments!!');
-      // res.append("LOL");
-      console.log(result);
+      // console.log('retrieved comments!!');
 
       // this implementation may be time and resource heavy, iterating all comments....
       res.empty();
@@ -71,10 +87,11 @@ function fetchComments(id){
 
 
 function postComment(id){
+  // var socket = io.connect();
   console.log("posting!!!    "+id);
   // let c = $('#comment').find('input[name="comment"]').val();
   let c = $('#comment').val();
-  console.log(c);
+  // console.log(c);
   $.ajax({
     type: 'POST',
     url: '/postComment',
@@ -84,12 +101,9 @@ function postComment(id){
       'processData': 'false',
     },
     success: function(result,status,xhr){
-      $('#comment').val('');
-      let res = $('#comments');
-      console.log("success!!");
-      console.log(result);
-      // res.append(result);
       fetchComments(id);
+      // let res = $('#comments');
+      // fetchComments(id);
     }
   });
 

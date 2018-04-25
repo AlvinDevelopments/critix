@@ -14,9 +14,9 @@ function loadPosts(){
       'Access-Control-Allow-Origin': '*',
     },
     success: function(result,status,xhr){
-      console.log('retrieved images');
+      // console.log('retrieved images');
       // res.append("LOL");
-      console.log(result);
+      // console.log(result);
 
       // // for(let i = 0; ;i++){
       // result.posts.forEach( function(post){

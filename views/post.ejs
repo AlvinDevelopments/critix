@@ -10,9 +10,9 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/scripts/materialize.js"></script>
     <script type="text/javascript" src="/scripts/extra.js"></script>
-    <script type="text/javascript" src="/scripts/uploadFunctions.js"></script>
     <script type="text/javascript" src="/scripts/main.js"></script>
     <script type="text/javascript" src="/scripts/post.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 </head>
 
     <!--Let browser know website is optimized for mobile-->
@@ -25,7 +25,7 @@
 
 
 <!-- <body> -->
-<body onload="fetchComments('<%=file._id.toString()%>'); setEnter();">
+<body onload="fetchComments('<%=file._id.toString()%>'); setEnter('<%=file._id.toString()%>'); socketListener('<%=file._id.toString()%>');">
   <div class="flow-text ">
     <br>
     <br>
@@ -255,12 +255,11 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("Error msg length " + document.getElementById("errorMsg").innerHTML);
+        // console.log("Error msg length " + document.getElementById("errorMsg").innerHTML);
         if(document.getElementById("errorMsg").innerHTML.trim() != ""){
             $('#loginModal').modal("open");
         }
     });
-
 </script>
 
 

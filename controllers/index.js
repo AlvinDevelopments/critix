@@ -61,7 +61,7 @@ router.post('/loadComments', function(req,res){
   queryComments.find({'post_id':req.body.post_id});
   queryComments.select('author comment time');
   // console.log(req.query.post_id);
-  console.log(req.body.post_id);
+  // console.log(req.body.post_id);
 
   queryComments.exec(function(err,comments){
     if(err){
@@ -71,55 +71,43 @@ router.post('/loadComments', function(req,res){
     }
     else{
       res.send(comments);
-      console.log('current comments: '+comments);
+      // console.log('current comments: '+comments);
     }
   });
 
 });
 
-// router.post('/postComment?comment=:comment&post_id=:id', functions.checkIfLoggedIn(), function(req,res){
-router.post('/postComment', functions.checkIfLoggedIn(), function(req,res){
-  let backURL=req.header('Referer').split('localhost/')[1] || '/';
-  console.log('posting a comment');
+
+
+router.post('/postComment', function(req,res){
+  console.log('posting a comment: '+req.body.comment);
 
   let comment = new Comment();
 
   comment.comment = req.body.comment;
-  console.log(req);
-
   comment.post_id = req.body.post_id;
   comment.author = req.session.user.username;
-
   comment.time = Date.now();
 
-
     comment.save(function(err){
-      if(err){
-        console.log("FAILED");
-        console.log(err);
-        return res.status(500).send();
-      }
-      else{
-        console.log("sent to db");
-        console.log("returning to post "+backURL);
-        // res.render(backURL);
-        // console.log(post);
-        // res.send(comment);
-        // return res.status(200).send('wow');
-        // res.send('sucess');
-      }
+      // if(err){
+      //   console.log("FAILED");
+      //   console.log(err);
+      // }
+      // else{
+      //   console.log("sent to db");
+      // }
     });
 
-    return res.status(200).send('wow');
+    res.status(200).send();
 
 });
 
 
 
-router.get('/test',function(req,res){
-  console.log('console log of the test.');
-  res.send('hi, this is a test!');
-});
+
+
+
 
 // Submit Login Credentials
 router.post('/login', function(req, res){

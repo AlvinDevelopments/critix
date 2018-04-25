@@ -5,6 +5,7 @@ var postSchema = new mongoose.Schema({
     filepath: String,
     author: String,
     title: String,
+    caption: String,
     date: Date
 });
 

@@ -29,6 +29,7 @@ var ObjectId = require('mongodb').ObjectID;
 // const moment = require('moment');
 
 
+
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //     res.render('index', { title: 'Express' });
@@ -44,6 +45,10 @@ router.get('/signup', function(req,res){
   res.render('signup');
 })
 
+// Retrieve Upload  Page
+router.get('/upload', function(req,res){
+  res.render('upload');
+})
 
 // Retrieve Comments for post_id
 router.get('/loadComments',function(req,res){
@@ -116,27 +121,33 @@ router.post('/login', function(req, res){
   console.log(username);
   console.log(password);
 
+  // Search through the database
   User.findOne({username: username, password: password}, function(err, user){
-
+      // if there was an err searching console log it
       if(err){
           console.log(err);
           return res.status(500).send();
       }
+      // if the user does not exist in the database send error message
       else if(user==null){
-          // return res.status(404).send();
-          res.render('index', {login: false, errorMsg: "Incorrect Username/Password"});
-      }else{
-
+          req.session.loginStatus = false;
+          res.render('index', {login: req.session.loginStatus, errorMsg: "Incorrect Username/Password"});
+      }
+      // Successful login
+      else{
       req.session.user = user;
-      return res.render('index', {login: true, user: req.session.user.username});
-    }
+      req.session.loginStatus = true;
+      res.redirect('/');
+      }
   });
 
 });
 
 router.get('/logout', function(req, res){
     req.session.destroy();
-    return res.status(200).send();
+    
+    res.redirect('/');
+    //return res.status(200).send();
 })
 
 // Retrieve registration page
@@ -147,6 +158,7 @@ router.get('/register', function(req, res){
 
 // Submit registration request
 router.post('/register', function(req, res){
+  // get form input
   var username = req.body.username;
   var password = req.body.password;
   var firstname = req.body.firstname;
@@ -156,18 +168,18 @@ router.post('/register', function(req, res){
   console.log(firstname);
   console.log(lastname);
 
+  // create a new user for the database
   var newUser = new User();
   newUser.username = username;
   newUser.password = password;
   newUser.firstname = firstname;
   newUser.lastname = lastname;
-
+  // save user info to database
   newUser.save(function(err, savedUser){
       if(err){
           console.log(err);
-          // return res.status(500).send();
       }
-      return res.render('index', {login: false});
+      return res.render('index', {login: req.session.loginStatus});
   })
 })
 
@@ -180,12 +192,13 @@ router.post('/register', function(req, res){
 // });
 
 // Renders the main page if user is logged in.
-router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login: true, user: req.session.user.username}));
+router.get('/',functions.checkIfLoggedIn(),(req,res)=>res.render('index', {login: req.session.loginStatus, user: req.session.user.username}));
 
 
 // Render Upload page
 router.get('/upload',function(req,res){
   res.render('upload');
+  console.log('upload get');
 });
 
 // Upload a file to server and registers it as a post in DB
@@ -194,60 +207,44 @@ router.post('/upload',(req,res)=>{
 	console.log("upload request");
   // create post via post Schema
   functions.upload(req,res,(err)=>{
-    // console.log(req.file.filename);
-    console.log(req.body.title);
-    // console.log('-----------------------------');
-    // console.log(req);
+    console.log(req.body.filepath);
     if(err){
       console.log("failed")
-      res.render('index',{
-        msg: err
-      });
+      return res.redirect('/');
     }
     else
     {
-      if(req.file==undefined){
+      if(req.body.filepath==undefined){
         console.log("Error: No File Selected!'");
-        res.render('index',{
-          msg: 'Error: No File Selected!'
-        });
+        return res.redirect('/');
       }
       else{
-        res.render('index',{
-          msg: 'File Uploaded!',
-          // file: `${req.file.filename}`
-        });
-
         let post = new Post();
-        let title = req.title;
+        let title = req.body.upload_title;
 
-          post.filepath = req.file.filename;
-          post.post_id = req.file.filename;
-          post.author = req.body.author;
-          post.title = req.body.title;
-          post.date = Date.now();
+        post.filepath = req.body.filepath;
+        post.post_id = req.body.filepath;
+        post.author = req.body.author;
+        post.title = req.body.upload_title;
+        post.date = Date.now();
 
-          post.save(function(err){
-            if(err){
-              console.log("FAILED");
-              console.log(err);
-              return res.status(500).send();
-            }
-            else{
-              console.log("sent to db");
-              console.log(post);
-              return res.status(200).send();
-            }
-          });
+        post.save(function(err){
+          if(err){
+            console.log("FAILED");
+            console.log(err);
+            return res.redirect('/');
+          }
+          else{
+            console.log("sent to db");
+            console.log(post);
+            return res.redirect('/');
 
+          }
+        })
       }
+    
     }
-  }
-);
-
-
-
-
+  })
 });
 
 

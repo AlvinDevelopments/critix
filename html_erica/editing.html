@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/extra.css" media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <div class="container">
+        <div class="section"></div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="col s4">
+                        <span id="name">
+                            Poopy Pants
+                        </span>
+                        <span id="name_edit" class="input-field hide">
+                            <input id="name_input" type="text">
+                        </span>
+                        <br>
+                        <br>
+                        <button id="name_editbtn" class="btn-small" onclick="edit('#name');return false;"><small>Edit</small></button>
+                        <button id="name_confirmbtn" class="btn-small hide" onclick="confirmEdit('#name');return false;"><small>Update</small></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.js"></script>
+    <script>
+        function edit(id) {
+            let oldval = $(id).text().trim();
+            $(id).text("");
+            $(id).addClass('hide'); //hide input text
+            $(id + '_edit').removeClass('hide'); //unhide input text
+            $(id + '_input').val(oldval);
+            $(id + '_editbtn').addClass('hide');
+            $(id + '_confirmbtn').removeClass('hide');
+        }
+
+        function confirmEdit(id) {
+            let newval = $(id + '_input').val();
+
+            $(id).removeClass('hide'); //unhide text
+            $(id).text(newval);
+            $(id + '_edit').addClass('hide');
+            $(id + '_editbtn').removeClass('hide');
+            $(id + '_confirmbtn').addClass('hide');
+
+        }
+    </script>
+</body>
+</html>

@@ -10,9 +10,30 @@ function socketListener(id){
   });
 
   $('#btnComment').click(function(event){
-      $('#comment').val('');
-      console.log('button pressed');
-      socket.emit('ping update', 'lol');
+      // var socket = io.connect();
+      console.log("posting!!!    "+id);
+      // let c = $('#comment').find('input[name="comment"]').val();
+      let c = $('#comment').val();
+      // console.log(c);
+      $.ajax({
+        type: 'POST',
+        url: '/postComment',
+        data: {comment:c,post_id:id},
+        headers:{
+          'Access-Control-Allow-Origin': '*',
+          'processData': 'false',
+        },
+        success: function(result,status,xhr){
+          $('#comment').val('');
+          fetchComments(id);
+          socket.emit('ping update', 'haha');
+          // let res = $('#comments');
+          // fetchComments(id);
+        }
+      });
+
+    return false;
+
   });
 
 }
@@ -87,26 +108,5 @@ function fetchComments(id){
 
 
 function postComment(id){
-  // var socket = io.connect();
-  console.log("posting!!!    "+id);
-  // let c = $('#comment').find('input[name="comment"]').val();
-  let c = $('#comment').val();
-  // console.log(c);
-  $.ajax({
-    type: 'POST',
-    url: '/postComment',
-    data: {comment:c,post_id:id},
-    headers:{
-      'Access-Control-Allow-Origin': '*',
-      'processData': 'false',
-    },
-    success: function(result,status,xhr){
-      fetchComments(id);
-      // let res = $('#comments');
-      // fetchComments(id);
-    }
-  });
-
-return false;
 
 }
